@@ -26,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+Console.WriteLine("Connection: " + builder.Configuration.GetConnectionString("PgConnection"));
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
