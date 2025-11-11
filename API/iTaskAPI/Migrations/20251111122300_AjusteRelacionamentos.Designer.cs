@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iTaskAPI.Connection;
@@ -11,9 +12,11 @@ using iTaskAPI.Connection;
 namespace iTaskAPI.Migrations
 {
     [DbContext(typeof(ConnectionDB))]
-    partial class ConnectionDBModelSnapshot : ModelSnapshot
+    [Migration("20251111122300_AjusteRelacionamentos")]
+    partial class AjusteRelacionamentos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,27 +92,25 @@ namespace iTaskAPI.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataPrevistaFim")
+                    b.Property<DateTime?>("DataPrevistaFim")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataPrevistaInicio")
+                    b.Property<DateTime?>("DataPrevistaInicio")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataRealFim")
+                    b.Property<DateTime?>("DataRealFim")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataRealInicio")
+                    b.Property<DateTime?>("DataRealInicio")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("text");
 
                     b.Property<string>("EstadoAtual")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int>("IdGestor")
                         .HasColumnType("integer");
@@ -121,11 +122,9 @@ namespace iTaskAPI.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("OrdemExecucao")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
-                    b.Property<int>("StoryPoints")
+                    b.Property<int?>("StoryPoints")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -153,9 +152,6 @@ namespace iTaskAPI.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Nome")
-                        .IsUnique();
 
                     b.ToTable("TiposTarefa");
                 });
@@ -189,12 +185,6 @@ namespace iTaskAPI.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("Username")
-                        .IsUnique();
 
                     b.ToTable("Utilizadores");
                 });

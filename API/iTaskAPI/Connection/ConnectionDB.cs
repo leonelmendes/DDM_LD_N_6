@@ -15,17 +15,31 @@ namespace iTaskAPI.Connection
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Índices únicos para Email e Username
+            modelBuilder.Entity<Utilizador>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Utilizador>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
+            // Índice único para nome do TipoTarefa
+            modelBuilder.Entity<TipoTarefa>()
+                .HasIndex(t => t.Nome)
+                .IsUnique();
+            
             // Relação 1:1 entre Utilizador e Gestor
             modelBuilder.Entity<Gestor>()
                 .HasOne(g => g.Utilizador)
-                .WithOne(u => u.Gestor)
+                .WithOne() //Sem referência em Utilizador
                 .HasForeignKey<Gestor>(g => g.IdUtilizador)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Relação 1:1 entre Utilizador e Programador
             modelBuilder.Entity<Programador>()
                 .HasOne(p => p.Utilizador)
-                .WithOne(u => u.Programador)
+                .WithOne() // Sem referência em Utilizador
                 .HasForeignKey<Programador>(p => p.IdUtilizador)
                 .OnDelete(DeleteBehavior.Restrict);
 

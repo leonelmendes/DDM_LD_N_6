@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iTaskAPI.Connection;
@@ -11,9 +12,11 @@ using iTaskAPI.Connection;
 namespace iTaskAPI.Migrations
 {
     [DbContext(typeof(ConnectionDB))]
-    partial class ConnectionDBModelSnapshot : ModelSnapshot
+    [Migration("20251111120345_AjusteJsonIgnore")]
+    partial class AjusteJsonIgnore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +35,7 @@ namespace iTaskAPI.Migrations
 
                     b.Property<string>("Departamento")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdUtilizador")
                         .HasColumnType("integer");
@@ -65,8 +67,7 @@ namespace iTaskAPI.Migrations
 
                     b.Property<string>("NivelExperiencia")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -89,27 +90,24 @@ namespace iTaskAPI.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataPrevistaFim")
+                    b.Property<DateTime?>("DataPrevistaFim")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataPrevistaInicio")
+                    b.Property<DateTime?>("DataPrevistaInicio")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataRealFim")
+                    b.Property<DateTime?>("DataRealFim")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DataRealInicio")
+                    b.Property<DateTime?>("DataRealInicio")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("text");
 
                     b.Property<string>("EstadoAtual")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdGestor")
                         .HasColumnType("integer");
@@ -121,11 +119,9 @@ namespace iTaskAPI.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("OrdemExecucao")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
-                    b.Property<int>("StoryPoints")
+                    b.Property<int?>("StoryPoints")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -149,13 +145,9 @@ namespace iTaskAPI.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Nome")
-                        .IsUnique();
 
                     b.ToTable("TiposTarefa");
                 });
@@ -170,31 +162,21 @@ namespace iTaskAPI.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("Username")
-                        .IsUnique();
 
                     b.ToTable("Utilizadores");
                 });
@@ -202,7 +184,7 @@ namespace iTaskAPI.Migrations
             modelBuilder.Entity("iTaskAPI.Models.Gestor", b =>
                 {
                     b.HasOne("iTaskAPI.Models.Utilizador", "Utilizador")
-                        .WithOne()
+                        .WithOne("Gestor")
                         .HasForeignKey("iTaskAPI.Models.Gestor", "IdUtilizador")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -219,7 +201,7 @@ namespace iTaskAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("iTaskAPI.Models.Utilizador", "Utilizador")
-                        .WithOne()
+                        .WithOne("Programador")
                         .HasForeignKey("iTaskAPI.Models.Programador", "IdUtilizador")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -271,6 +253,13 @@ namespace iTaskAPI.Migrations
             modelBuilder.Entity("iTaskAPI.Models.TipoTarefa", b =>
                 {
                     b.Navigation("Tarefas");
+                });
+
+            modelBuilder.Entity("iTaskAPI.Models.Utilizador", b =>
+                {
+                    b.Navigation("Gestor");
+
+                    b.Navigation("Programador");
                 });
 #pragma warning restore 612, 618
         }

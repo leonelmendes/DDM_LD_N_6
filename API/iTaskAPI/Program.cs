@@ -1,5 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using iTaskAPI.Connection;
+using iTaskAPI.Repository.TarefaRepository;
+using iTaskAPI.Repository.GestorRepository;
+using iTaskAPI.Repository.ProgramadorRepository;
+using iTaskAPI.Repository.TipoTarefaRepository;
+using iTaskAPI.Repository.UtilizadorRepository;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using iTaskAPI.Repository.AuthRepository;
 //using iTaskAPI.Repository.Interfaces;
 //using iTaskAPI.Repository.Implementations;
 
@@ -9,6 +16,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ConnectionDB>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PgConnection"))
 );
+
+// INJEÇÃO DE DEPENDÊNCIA DOS REPOSITÓRIOS
+// Aqui registramos os repositórios que serão usados nos controllers
+builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
+builder.Services.AddScoped<IGestorRepository, GestorRepository>();
+builder.Services.AddScoped<IProgramadorRepository, ProgramadorRepository>();
+builder.Services.AddScoped<ITipoTarefaRepository, TipoTarefaRepository>();
+builder.Services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
+builder.Services.AddScoped<IAuthenticateRepository, AuthenticateRepository>();
 
 builder.Services.AddControllers();
 
@@ -26,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-Console.WriteLine("Connection: " + builder.Configuration.GetConnectionString("PgConnection"));
+// teste conexao Console.WriteLine("Connection: " + builder.Configuration.GetConnectionString("PgConnection"));
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

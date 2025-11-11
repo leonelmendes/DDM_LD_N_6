@@ -1,22 +1,36 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace iTaskAPI.Models
 {
+    [Table("Utilizadores")]
     public class Utilizador
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         [Required]
-        public string? Nome { get; set; }
+        [StringLength(100)]
+        public string Nome { get; set; } = string.Empty;
+
         [Required]
-        public string? Email { get; set; }
+        [StringLength(100)]
+        public string Email { get; set; } = string.Empty;
+
         [Required]
-        public string? Password { get; set; }
+        [StringLength(50)]
+        public string Username { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(100)]
+        public string Password { get; set; } = string.Empty;
        
-       // Relações com outras entidades podem ser adicionadas aqui
-       public Gestor? Gestor { get; set; }
-       public Programador? Programador { get; set; }
+       // Relações com outras entidades (não incluídas no JSON)
+       /*[JsonIgnore]
+        public Gestor? Gestor { get; set; }
+       [JsonIgnore]
+       public Programador? Programador { get; set; }*/
     }
 }
