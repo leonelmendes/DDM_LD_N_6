@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("iTask-App-Mobile")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+ea752697f201670c09e5bef141881dfdebe97a2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+915573633bb80e1dee99b9b8c081b6f92b2ea2bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("iTask-App-Mobile")]
 [assembly: System.Reflection.AssemblyTitleAttribute("iTask-App-Mobile")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
