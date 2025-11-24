@@ -2,6 +2,7 @@ using iTaskAPI.Connection;
 using iTaskAPI.Models;
 using iTaskAPI.Models.DTOs;
 using iTaskAPI.Repository.AuthRepository;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,30 +25,21 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
         // POST /api/authenticate/login
         // Faz o login de um utilizador existente
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] Utilizador loginData)
+        public async Task<ActionResult> Login([FromBody] LoginRequestDTO loginData)
         {
             if (loginData == null || string.IsNullOrEmpty(loginData.Username) || string.IsNullOrEmpty(loginData.Password))
             {
                 return BadRequest("Credenciais inválidas.");
             }
 
-            Utilizador? utilizador = await _repository.LoginAsync(loginData.Username, loginData.Password);
+            var utilizador = await _repository.LoginAsync(loginData.Username, loginData.Password);
 
             if (utilizador == null)
             {
                 return Unauthorized("Username ou senha incorretos.");
             }
 
-            return Ok(new
-            {
-                message = "Login realizado com sucesso.",
-                user = new
-                {
-                    utilizador.Id,
-                    utilizador.Nome,
-                    utilizador.Username
-                }
-            });
+            return Ok(utilizador);
         }
 
         // POST /api/authenticate/register

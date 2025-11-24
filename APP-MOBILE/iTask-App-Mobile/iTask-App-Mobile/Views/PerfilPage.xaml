@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.PerfilPage"
+             Title="PerfilPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- HEADER -->
+            <Grid >
+
+                <Grid ColumnDefinitions="Auto,*,Auto">
+
+                    <!-- Voltar -->
+                    <Image Source="back_placeholder.png"
+                           WidthRequest="22"
+                           HeightRequest="22"
+                           VerticalOptions="Center"/>
+
+                    <Label Grid.Column="1"
+                           Text="Meu Perfil"
+                           FontFamily="InterSemiBold"
+                           FontSize="20"
+                           HorizontalOptions="Center"/>
+
+                    <Image Grid.Column="2"/>
+                </Grid>
+
+            </Grid>
+
+
+            <!-- CABEÇALHO DO PERFIL -->
+            <VerticalStackLayout Padding="20" Spacing="14" HorizontalOptions="Center">
+
+                <Frame WidthRequest="100" HeightRequest="100"
+                       CornerRadius="50"
+                       BackgroundColor="{StaticResource Gray100}"
+                       HasShadow="False">
+                    <Image Source="person_2.png" WidthRequest="100" HeightRequest="100"
+                           Aspect="AspectFill"/>
+                </Frame>
+
+                <Label Text="Leonel Francisco"
+                       FontFamily="InterSemiBold"
+                       FontSize="22"
+                       TextColor="{StaticResource Gray900}"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="Programador"
+                       FontFamily="InterRegular"
+                       FontSize="14"
+                       TextColor="{StaticResource Gray600}"
+                       HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+
+
+            <!-- INFORMAÇÕES -->
+            <VerticalStackLayout Padding="20" Spacing="18">
+
+                <!-- Email -->
+                <Frame BackgroundColor="{StaticResource Gray100}"
+                       CornerRadius="14"
+                       BorderColor="{StaticResource Gray200}"
+                       Padding="16"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Source="email_icon.png"
+                               WidthRequest="20" HeightRequest="20"/>
+                        <Label Grid.Column="1"
+                               Text="leonelftacisco@hotmail.com"
+                               FontFamily="InterRegular"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray900}"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Username -->
+                <Frame BackgroundColor="{StaticResource Gray100}"
+                       CornerRadius="14"
+                       BorderColor="{StaticResource Gray200}"
+                       Padding="16"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Source="user_icon.png"
+                               WidthRequest="20" HeightRequest="20"/>
+                        <Label Grid.Column="1"
+                               Text="leonelfrancisco"
+                               FontFamily="InterRegular"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray900}"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Tipo -->
+                <Frame BackgroundColor="{StaticResource Gray100}"
+                       CornerRadius="14"
+                       BorderColor="{StaticResource Gray200}"
+                       Padding="16"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Source="badge_icon.png"
+                               WidthRequest="20" HeightRequest="20"/>
+                        <Label Grid.Column="1"
+                               Text="Programador"
+                               FontFamily="InterSemiBold"
+                               FontSize="14"
+                               TextColor="{StaticResource Primary}"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Número de tarefas -->
+                <Frame BackgroundColor="{StaticResource Gray100}"
+                       CornerRadius="14"
+                       BorderColor="{StaticResource Gray200}"
+                       Padding="16"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Source="tasks_icon.png"
+                               WidthRequest="20" HeightRequest="20"/>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Text="Tarefas atribuídas"
+                                   FontFamily="InterRegular"
+                                   FontSize="13"
+                                   TextColor="{StaticResource Gray600}"/>
+
+                            <Label Text="12 tarefas ativas"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource Gray900}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+            </VerticalStackLayout>
+
+
+            <!-- BOTÕES DE AÇÃO -->
+            <VerticalStackLayout Padding="20" Spacing="12">
+
+                <!-- Editar perfil -->
+                <Frame BackgroundColor="{StaticResource Primary}"
+                       CornerRadius="14"
+                       HasShadow="False"
+                       Padding="0">
+                    <Button Text="Editar Perfil"
+                            FontFamily="InterSemiBold"
+                            TextColor="White"
+                            HeightRequest="50"
+                            BackgroundColor="Transparent"/>
+                </Frame>
+
+                <!-- Logout -->
+                <Button Text="Terminar Sessão"
+                        FontFamily="InterSemiBold"
+                        HeightRequest="50"
+                        BackgroundColor="Transparent"/>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

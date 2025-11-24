@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.DashboardProgramadorPage"
+             Title="DashboardProgramadorPage">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+
+            <!-- HEADER -->
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                <Image
+                    
+                     Source="menu_icon.png"
+                     WidthRequest="28"
+                     HeightRequest="28"/>
+
+                <Label
+                     Grid.Column="0"
+                     Text="iTask"
+                     FontFamily="InterSemiBold"
+                     FontSize="Title"
+                     TextColor="Black"/>
+
+                <Image
+                     Grid.Column="2"
+                     Source="user.png"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     Aspect="AspectFill"/>
+            </Grid>
+
+            <!-- Saudação -->
+            <VerticalStackLayout Margin="0,5">
+                <Label Text="Olá, João Silva"
+                       FontFamily="InterBold+-89"
+                       FontSize="Medium"
+                       TextColor="{StaticResource Black}"/>
+
+                <Label Text="Programador · 12 tarefas atribuidas"
+                       FontFamily="InterRegular"
+                       FontSize="14"
+                       TextColor="{StaticResource Gray600}"/>
+            </VerticalStackLayout>
+
+            <!-- CARDS -->
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Total -->
+                <Frame BackgroundColor="White"
+                       BorderColor="{StaticResource Gray200}"
+                       CornerRadius="12"
+                       VerticalOptions="Center"
+                       HasShadow="False">               
+                    <Grid >
+                        <Label Text="Total"
+                               FontFamily="InterMedium"
+                               VerticalTextAlignment="Center"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray600}"/>
+
+                        <Label Text="25"
+                               FontFamily="InterSemiBold"
+                               FontSize="28"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Done -->
+                <Frame BackgroundColor="#E9F7EB"
+                       CornerRadius="12"
+                       BorderColor="#CFEFD6">
+                    <Grid >
+                        <Label Text="Done"
+                               FontFamily="InterMedium"
+                               VerticalTextAlignment="Center"
+                               FontSize="15"
+                               TextColor="#3E9153"/>
+
+                        <Label Text="12"
+                               FontFamily="InterSemiBold"
+                               FontSize="28"
+                               TextColor="#3E9153"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="10">
+                <!-- Ações rápidas -->
+                <Label Text="Ações Rápidas"
+                       FontFamily="InterSemiBold"
+                       FontSize="17"
+                       TextColor="{StaticResource Gray900}"
+                       Margin="0,10,0,0"/>
+
+                <!-- Ver Kanban -->
+
+                <Frame CornerRadius="12"
+                       BackgroundColor="{StaticResource Primary}"
+                       Padding="14"
+                       HeightRequest="52">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Source="kanban_icon.png"
+                               WidthRequest="22"
+                               HeightRequest="22"/>
+
+                        <Label Grid.Column="1"
+                               Text="Ver Kanban"
+                               FontFamily="InterSemiBold"
+                               FontSize="15"
+                               TextColor="White"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Tarefas concluídas -->
+                <Frame CornerRadius="12"
+                       BackgroundColor="{StaticResource Gray100}"
+                       Padding="14"
+                       HeightRequest="52">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Image Source="check_icon.png"
+                               WidthRequest="22"
+                               HeightRequest="22"/>
+
+                        <Label Grid.Column="1"
+                               Text="Tarefas Concluídas"
+                               FontFamily="InterSemiBold"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray900}"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

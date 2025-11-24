@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.EquipePage"
+             Title="EquipePage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="0,10">
+
+                <Image Source="back_placeholder.png"
+                   WidthRequest="22"
+                   HeightRequest="22"
+                   VerticalOptions="Center"/>
+
+                <StackLayout Grid.Column="1" HorizontalOptions="Center">
+                    <Label Text="Equipe"
+                       FontFamily="InterSemiBold"
+                       FontSize="22"
+                       HorizontalOptions="Center"/>
+                    <Label Text="Gestor - Lista de Programadores"
+                       FontFamily="InterRegular"
+                       FontSize="13"
+                       TextColor="{StaticResource Gray600}"
+                       HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <Image Grid.Column="2"
+                   Source="refresh_placeholder.png"
+                   WidthRequest="22"
+                   HeightRequest="22"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"/>
+            </Grid>
+
+            <!-- Botão adicionar -->
+            <Button Text="+  Adicionar Programador"
+                FontFamily="InterSemiBold"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="14"
+                HeightRequest="50"/>
+
+            <!-- Card de Programador -->
+            <Frame BackgroundColor="White"
+               CornerRadius="14"
+               Padding="14"
+               HasShadow="True"
+               BorderColor="{StaticResource Gray100}">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Frame WidthRequest="50" HeightRequest="50" BorderColor="Transparent" CornerRadius="25">
+                        <Image Source="person_1.png"
+                               WidthRequest="50"
+                               HeightRequest="50" />
+                    </Frame>
+
+                    <StackLayout Grid.Column="1" Padding="10,0" Spacing="2">
+                        <Label Text="João Silva"
+                           FontFamily="InterSemiBold"/>
+                        <Label Text="Frontend Developer"
+                           FontFamily="InterRegular"
+                           FontSize="13"
+                           TextColor="{StaticResource Gray600}"/>
+
+                        <HorizontalStackLayout Spacing="10" Margin="0,4,0,0">
+                            <Label Text="5 ativas"
+                               FontFamily="InterRegular"
+                               FontSize="12"
+                               TextColor="{StaticResource Gray600}"/>
+                            <Label Text="12 concluídas"
+                               FontFamily="InterRegular"
+                               FontSize="12"
+                               TextColor="Green"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Barra de progresso -->
+                        <Grid Margin="0,6,0,0">
+                            <BoxView HeightRequest="4"
+                                 CornerRadius="2"
+                                 BackgroundColor="{StaticResource Gray200}"/>
+                            <BoxView HeightRequest="4"
+                                 CornerRadius="2"
+                                 BackgroundColor="{StaticResource Primary}"
+                                 WidthRequest="160"
+                                 HorizontalOptions="Start"/>
+                        </Grid>
+
+                        <Label Text="Taxa de conclusão 71%"
+                           FontFamily="InterRegular"
+                           FontSize="11"
+                           TextColor="{StaticResource Gray600}"
+                           Margin="0,2,0,0"/>
+                    </StackLayout>
+
+                    <Image Grid.Column="2"
+                       Source="more_vert_placeholder.png"
+                       WidthRequest="18"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start"/>
+                </Grid>
+            </Frame>
+
+            <!-- Outros cards podem ser duplicados abaixo -->
+            <!-- ... -->
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

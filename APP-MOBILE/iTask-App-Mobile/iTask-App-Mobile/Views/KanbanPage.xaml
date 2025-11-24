@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.KanbanPage"
+             Title="KanbanPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="10,20" Spacing="20">
+
+            <!-- HEADER -->
+            <Grid VerticalOptions="Center">
+
+                <VerticalStackLayout>
+                    <Label Text="Kanban"
+                           FontFamily="InterSemiBold"
+                           FontSize="22"
+                           TextColor="{StaticResource Black}"/>
+                    <Label Text="Olá, Leonel Francisco..." FontFamily="InterLight"/>
+                </VerticalStackLayout>
+
+            </Grid>
+
+            <!-- 🟥 TO DO -->
+            <Frame CornerRadius="16"
+                   BackgroundColor="#FFF5E8"
+                   Padding="16">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="relogio.png"
+                               WidthRequest="20"
+                               HeightRequest="20"/>
+
+                        <Label Text="To Do (8)"
+                               Grid.Column="1"
+                               FontFamily="InterSemiBold"
+                               FontSize="18"
+                               TextColor="#C46A00"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Card Tarefa -->
+                    <Frame BackgroundColor="White"
+                           Padding="14"
+                           CornerRadius="14"
+                           BorderColor="#FFE1BE">
+
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Implementar autenticação"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="16"/>
+
+                            <Label Text="Criar sistema de login e registro com JWT"
+                                   FontFamily="InterRegular"
+                                   FontSize="13"
+                                   TextColor="{StaticResource Gray600}"/>
+
+                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6">
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="25">
+                                        <Image Source="person_1.png" WidthRequest="40" HeightRequest="40"/>
+                                    </Frame>
+
+                                    <Label Text="Carlos"
+                                           FontFamily="InterRegular"
+                                           FontSize="13"
+                                           VerticalOptions="Center"
+                                           TextColor="{StaticResource Gray600}"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Data -->
+                                <Frame Grid.Column="2"
+                                       BackgroundColor="#FFE3C4"
+                                       VerticalOptions="Center"
+                                       Padding="6,2"
+                                       CornerRadius="6">
+                                    <Label Text="15 Jan"
+                                           FontFamily="InterMedium"
+                                           FontSize="12"
+                                           TextColor="#C46A00"/>
+                                </Frame>
+
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- 🟦 DOING -->
+            <Frame CornerRadius="16"
+                   BackgroundColor="#EAF0FF"
+                   Padding="16">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="play.png"
+                               WidthRequest="20"
+                               HeightRequest="20"/>
+
+                        <Label Text="Doing (5)"
+                               Grid.Column="1"
+                               FontFamily="InterSemiBold"
+                               FontSize="18"
+                               TextColor="#3567F0"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Card DOING -->
+                    <Frame BackgroundColor="White"
+                           Padding="14"
+                           CornerRadius="14"
+                           BorderColor="#CCE0FF">
+
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="API de tarefas"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="16"/>
+
+                            <Label Text="Desenvolver endpoints CRUD"
+                                   FontFamily="InterRegular"
+                                   FontSize="13"
+                                   TextColor="{StaticResource Gray600}"/>
+
+                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6">
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="25">
+                                        <Image Source="person_2.png"
+                                                WidthRequest="40"
+                                                HeightRequest="40"/>        
+                                    </Frame>
+
+                                    <Label Text="Vitoria"
+                                            FontFamily="InterRegular"
+                                            FontSize="13"
+                                            VerticalOptions="Center"
+                                            TextColor="{StaticResource Gray600}"/>
+                                </HorizontalStackLayout>
+
+                                <Frame Grid.Column="2"
+                                       BackgroundColor="#DCE8FF"
+                                       VerticalOptions="Center"
+                                       Padding="6,2"
+                                       CornerRadius="6">
+                                    <Label Text="12 Jan"
+                                           FontFamily="InterMedium"
+                                           FontSize="12"
+                                           TextColor="#3567F0"/>
+                                </Frame>
+
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- 🟩 DONE -->
+            <Frame CornerRadius="16"
+                   BackgroundColor="#E4F7E8"
+                   Padding="16">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="verificar.png" WidthRequest="20" HeightRequest="20"/>
+
+                        <Label Text="Done (12)"
+                               Grid.Column="1"
+                               FontFamily="InterSemiBold"
+                               FontSize="18"
+                               TextColor="#148C41"/>
+
+                        <Image Grid.Column="2"
+                               Source="arrow_down_placeholder.png"
+                               WidthRequest="18"/>
+                    </HorizontalStackLayout>
+
+                    <Frame BackgroundColor="White"
+                           Padding="14"
+                           CornerRadius="14"
+                           BorderColor="#BBEBC6">
+
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Setup inicial do projeto"
+                                   FontFamily="InterSemiBold"
+                                   FontSize="16"/>
+
+                            <Label Text="Configurar React Native e dependências"
+                                   FontFamily="InterRegular"
+                                   FontSize="13"
+                                   TextColor="{StaticResource Gray600}"/>
+
+                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6">
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Frame  WidthRequest="26" HeightRequest="26" CornerRadius="25">
+                                        <Image Source="person_3.png"
+                                               WidthRequest="26"
+                                               HeightRequest="26"/>
+                                    </Frame>
+
+                                    <Label Text="Ana"
+                                           Grid.Column="1"
+                                           FontFamily="InterRegular"
+                                           FontSize="13"
+                                           TextColor="{StaticResource Gray600}"
+                                           VerticalOptions="Center"/>
+
+                                </HorizontalStackLayout>
+                                
+                                <Frame Grid.Column="2"
+                                       BackgroundColor="#C6EDCF"
+                                       VerticalOptions="Center"
+                                       Padding="6,2"
+                                       CornerRadius="6">
+                                    <Label Text="10 Jan"
+                                           FontFamily="InterMedium"
+                                           FontSize="12"
+                                           TextColor="#148C41"/>
+                                </Frame>
+
+                            </Grid>
+
+                        </VerticalStackLayout>
+
+                    </Frame>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

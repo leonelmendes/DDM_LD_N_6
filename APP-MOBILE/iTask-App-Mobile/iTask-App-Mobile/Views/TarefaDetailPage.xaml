@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.TarefaDetailPage"
+             Title="TarefaDetailPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                <Image Source="back_icon.png"
+                       HeightRequest="24" WidthRequest="24"/>
+
+                <Label Grid.Column="1"
+                       Text="Detalhes da Tarefa"
+                       FontFamily="InterSemiBold"
+                       FontSize="22"
+                       TextColor="{StaticResource Gray900}"
+                       HorizontalOptions="Center"/>
+            </Grid>
+
+            <!-- Card principal -->
+            <Frame CornerRadius="16"
+                   BackgroundColor="White"
+                   BorderColor="{StaticResource Gray200}"
+                   HasShadow="False"
+                   Padding="20">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <!-- Nome -->
+                    <VerticalStackLayout>
+                        <Label Text="Título"
+                               FontFamily="InterMedium"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray600}"/>
+                        <Label Text="Implementar Autenticação"
+                               FontFamily="InterSemiBold"
+                               FontSize="18"
+                               TextColor="{StaticResource Gray900}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Descrição -->
+                    <VerticalStackLayout>
+                        <Label Text="Descrição"
+                               FontFamily="InterMedium"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray600}"/>
+                        <Label Text="Criar sistema de login com JWT..."
+                               FontFamily="InterRegular"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray900}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Tipo -->
+                    <VerticalStackLayout>
+                        <Label Text="Tipo"
+                               FontFamily="InterMedium"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray600}"/>
+                        <Label Text="Cloud"
+                               FontFamily="InterRegular"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray900}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Estado -->
+                    <VerticalStackLayout>
+                        <Label Text="Estado Atual"
+                               FontFamily="InterMedium"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray600}"/>
+
+                        <Frame BackgroundColor="{StaticResource Gray100}"
+                               BorderColor="{StaticResource Gray300}"
+                               CornerRadius="12"
+                               Padding="12,8">
+                            <Picker Title="Selecionar estado"
+                                    FontFamily="InterRegular"/>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Atribuição -->
+                    <VerticalStackLayout>
+                        <Label Text="Atribuído a"
+                               FontFamily="InterMedium"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray600}"/>
+
+                        <Frame BackgroundColor="{StaticResource Gray100}"
+                               BorderColor="{StaticResource Gray300}"
+                               CornerRadius="12"
+                               Padding="12,8">
+                            <Picker Title="Selecionar programador"
+                                    FontFamily="InterRegular"/>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Datas -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+
+                        <StackLayout>
+                            <Label Text="Data Prevista Início"
+                                   FontFamily="InterMedium"
+                                   FontSize="14"
+                                   TextColor="{StaticResource Gray600}"/>
+                            <Entry Text="01/10/2023"
+                                   FontFamily="InterRegular"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Data Prevista Fim"
+                                   FontFamily="InterMedium"
+                                   FontSize="14"
+                                   TextColor="{StaticResource Gray600}"/>
+                            <Entry Text="05/10/2023"
+                                   FontFamily="InterRegular"/>
+                        </StackLayout>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- Botão Atualizar -->
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   CornerRadius="12" HasShadow="False" Padding="0">
+                <Button Text="Atualizar Tarefa"
+                        TextColor="White"
+                        FontFamily="InterSemiBold"
+                        BackgroundColor="Transparent"
+                        HeightRequest="52"/>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

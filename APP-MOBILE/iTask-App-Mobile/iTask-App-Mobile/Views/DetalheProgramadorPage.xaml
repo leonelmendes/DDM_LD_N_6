@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.DetalheProgramadorPage"
+             Title="DetalheProgramadorPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- HEADER  -->
+            <Grid >
+
+                <Grid ColumnDefinitions="Auto,*,Auto">
+
+                    <!-- Botão voltar (placeholder) -->
+                    <Image Source="back_placeholder.png"
+                           WidthRequest="22"
+                           HeightRequest="22"
+                           VerticalOptions="Center"/>
+
+                    <!-- Título -->
+                    <StackLayout Grid.Column="1"
+                                 HorizontalOptions="Center">
+                        <Label Text="Editar Programador"
+                               FontFamily="InterSemiBold"
+                               FontSize="20"
+                               HorizontalOptions="Center"/>
+
+                        <Label Text="Atualize os dados deste programador"
+                               FontFamily="InterRegular"
+                               FontSize="13"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
+
+                    <!-- Avatar do gestor (placeholder) -->
+                    <Image Grid.Column="2"
+                           Source="user_photo.png"
+                           WidthRequest="32"
+                           HeightRequest="32"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Grid>
+
+            <!-- CONTEÚDO -->
+            <VerticalStackLayout Margin="0,20" Spacing="10">
+
+                <!-- Info do programador -->
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="12">
+
+                    <Image Source="avatar_placeholder.png"
+                           WidthRequest="50"
+                           HeightRequest="50"/>
+
+                    <VerticalStackLayout>
+                        <Label Text="João Silva"
+                               FontFamily="InterSemiBold"
+                               FontSize="17"
+                               TextColor="{StaticResource Gray900}"/>
+                        <Label Text="Frontend Developer"
+                               FontFamily="InterRegular"
+                               FontSize="13"
+                               TextColor="{StaticResource Gray600}"/>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <StackLayout Spacing="5">
+                    <Label Text="Nome completo"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="10,3" CornerRadius="15" >
+                        <Entry Placeholder="Digite o nome" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                    </Frame>
+                </StackLayout>
+
+
+                <StackLayout Spacing="5">
+                    <Label Text="Email"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="10,3" CornerRadius="15" >
+                        <Entry Placeholder="email@exemplo.com" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                    </Frame>
+                </StackLayout>
+
+
+                <StackLayout Spacing="5">
+                    <Label Text="Username"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="10,3" CornerRadius="15" >
+                        <Entry Placeholder="Nome de Utilizador" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="5">
+                    <Label Text="Nível de experiência"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray900}"/>
+                    <Frame CornerRadius="10"
+                            BackgroundColor="{StaticResource Gray100}"
+                            Padding="10,3">
+                        <Grid >
+                            <Picker Title="Selecione o nível" FontFamily="InterRegular" >
+                                <Picker.Items>
+                                    <x:String>Júnior</x:String>
+                                    <x:String>Pleno</x:String>
+                                    <x:String>Sênior</x:String>
+                                    <x:String>Top Xuxa</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Image HorizontalOptions="End" Source="seta_baixo2.png" HeightRequest="20" WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+
+
+                <!-- Gestor responsável (apenas visual, pode ser só leitura depois) -->
+                <StackLayout Spacing="5">
+                    <Label Text="Gestor responsável"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray900}"/>
+                    <Frame CornerRadius="10"
+                            BackgroundColor="{StaticResource Gray100}"
+                            Padding="10,3">
+                        <Grid >
+                            <Picker Title="Selecionar gestor" FontFamily="InterRegular" >
+                                <Picker.Items>
+                                    <x:String>Leonel Francisco</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Image HorizontalOptions="End" Source="seta_baixo2.png" HeightRequest="20" WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Botão Salvar -->
+                <Frame BackgroundColor="{StaticResource Primary}"
+                       CornerRadius="14"
+                       HasShadow="False"
+                       Padding="0"
+                       Margin="0,10,0,0">
+                    <Button Text="Salvar alterações"
+                            FontFamily="InterSemiBold"
+                            TextColor="White"
+                            BackgroundColor="Transparent"
+                            HeightRequest="52"/>
+                </Frame>
+
+                <!-- Botão Remover (secundário, opcional) -->
+                <Button Text="Remover programador"
+                        FontFamily="InterRegular"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource DangerColor}"
+                        HeightRequest="44"/>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

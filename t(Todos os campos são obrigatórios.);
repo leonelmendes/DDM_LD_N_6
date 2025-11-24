@@ -1,0 +1,41 @@
+* [33mcommit 915573633bb80e1dee99b9b8c081b6f92b2ea2bb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/api[m[33m, [m[1;31morigin/feature/api[m[33m)[m
+[31m|[m Author: Leonel Francisco <leonelftacisco@hotmail.com>
+[31m|[m Date:   Tue Nov 11 14:23:16 2025 +0000
+[31m|[m 
+[31m|[m     api finalizada, testada, todos os metodos implementados
+[31m|[m 
+* [33mcommit f0cfc81b8c1e4acc45242b2047b3998e3a2e31bd[m
+[31m|[m Author: Leonel Francisco <leonelftacisco@hotmail.com>
+[31m|[m Date:   Sat Nov 8 11:05:38 2025 +0000
+[31m|[m 
+[31m|[m     estruturação das pastas e criação de todas as interfaces, classes e controllers
+[31m|[m 
+* [33mcommit 6a56a3649a109fc6aba565a1840894966bed2e5e[m
+[31m|[m Author: Leonel Francisco <leonelftacisco@hotmail.com>
+[31m|[m Date:   Sat Nov 8 10:15:54 2025 +0000
+[31m|[m 
+[31m|[m     Configuração do EF, criação das tables e migrations para o database
+[31m|[m 
+* [33mcommit ca798074a6e2b88f0c643fe58c1a0255a163832c[m
+[31m|[m Author: Leonel Francisco <leonelftacisco@hotmail.com>
+[31m|[m Date:   Thu Nov 6 21:48:13 2025 +0000
+[31m|[m 
+[31m|[m     create the template API
+[31m|[m 
+* [33mcommit c68be01ff5ea50ec8aef019a83db6978cdfec546[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+[31m|[m Author: Leonel Francisco <leonelftacisco@hotmail.com>
+[31m|[m Date:   Thu Nov 6 21:27:59 2025 +0000
+[31m|[m 
+[31m|[m     Criação do Projeto App Mobile e Adicionei os diagramas DER
+[31m|[m 
+* [33mcommit ea752697f201670c09e5bef141881dfdebe97a2a[m
+[31m|[m Author: Leonel Francisco <leonelftacisco@hotmail.com>
+[31m|[m Date:   Wed Oct 15 21:44:49 2025 +0100
+[31m|[m 
+[31m|[m     subindo as pastas
+[31m|[m 
+* [33mcommit fa95554772a6b17342abe789a0da4059de65259a[m
+  Author: Leonel Francisco <leonelftacisco@hotmail.com>
+  Date:   Wed Oct 15 21:42:03 2025 +0100
+  
+      primeiro commit

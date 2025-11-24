@@ -136,3 +136,4 @@ C:\Users\leone\OneDrive\Documentos\Aulas\Laboratorio-de-Desenvolvimento-II\iTask
 C:\Users\leone\OneDrive\Documentos\Aulas\Laboratorio-de-Desenvolvimento-II\iTask\API\iTaskAPI\obj\Debug\net8.0\iTaskAPI.pdb
 C:\Users\leone\OneDrive\Documentos\Aulas\Laboratorio-de-Desenvolvimento-II\iTask\API\iTaskAPI\obj\Debug\net8.0\iTaskAPI.genruntimeconfig.cache
 C:\Users\leone\OneDrive\Documentos\Aulas\Laboratorio-de-Desenvolvimento-II\iTask\API\iTaskAPI\obj\Debug\net8.0\ref\iTaskAPI.dll
+C:\Users\leone\OneDrive\Documentos\Aulas\Laboratorio-de-Desenvolvimento-II\iTask\API\iTaskAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
