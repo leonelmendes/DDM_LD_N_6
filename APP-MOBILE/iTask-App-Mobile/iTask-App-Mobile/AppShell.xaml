@@ -8,15 +8,35 @@
     Shell.NavBarIsVisible="False"
     Title="iTask_App_Mobile">
 
-    <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage" />
 
+    <!-- ====================== LOGIN ====================== -->
     <ShellContent
-        Title="Register"
-        ContentTemplate="{DataTemplate views:RegisterPage}"
-        Route="RegisterPage" />
+        Route="LoginPage"
+        ContentTemplate="{DataTemplate views:LoginPage}" />
 
+    <!-- ==================== TABBAR GESTOR ==================== -->
+    <TabBar x:Name="TabBar_Gestor" IsVisible="True">
+
+        <Tab Title="Dashboard" Icon="casa.png">
+            <ShellContent ContentTemplate="{DataTemplate views:DashboardGestorPage}"
+                          Route="DashboardGestorPage" />
+        </Tab>
+
+        <Tab Title="Equipe" Icon="equipe.png">
+            <ShellContent ContentTemplate="{DataTemplate views:EquipePage}"
+                          Route="EquipePage" />
+        </Tab>
+
+        <Tab Title="Relatórios" Icon="relatorio.png">
+            <ShellContent ContentTemplate="{DataTemplate views:RelatorioPage}"
+                          Route="RelatorioPage" />
+        </Tab>
+
+        <Tab Title="Perfil" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate views:PerfilPage}"
+                          Route="PerfilPage" />
+        </Tab>
+
+    </TabBar>
 
 </Shell>

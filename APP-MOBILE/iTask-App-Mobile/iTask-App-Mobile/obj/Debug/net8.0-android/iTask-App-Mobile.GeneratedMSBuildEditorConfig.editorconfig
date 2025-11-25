@@ -35,11 +35,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.AppShell.
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Components/EquipeComponent.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Components.EquipeComponent.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\EquipeComponent.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\EquipeComponent.xaml
+
 [C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/ProgrammerShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.ProgrammerShell.xaml
+build_metadata.AdditionalFiles.TargetPath = ProgrammerShell.xaml
+build_metadata.AdditionalFiles.RelativePath = ProgrammerShell.xaml
 
 [C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

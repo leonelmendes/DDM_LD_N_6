@@ -1,4 +1,6 @@
-﻿using iTask_App_Mobile.Services.AuthenticateService;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Core;
+using iTask_App_Mobile.Services.AuthenticateService;
 using iTask_App_Mobile.Services.GestorService;
 using iTask_App_Mobile.Services.ProgramadorService;
 using iTask_App_Mobile.Services.TarefaService;
@@ -17,6 +19,11 @@ namespace iTask_App_Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit(options =>
+                {
+                    options.SetShouldEnableSnackbarOnWindows(true);
+                })
+                .UseMauiCommunityToolkitCore()
                 .ConfigureFonts(fonts =>
                 {
                     
@@ -43,9 +50,25 @@ namespace iTask_App_Mobile
             // View Models
             builder.Services.AddTransient<RegisterPageViewModel>();
             builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<DashboardGestorPageViewModel>();
+            builder.Services.AddTransient<PerfilPageViewModel>();
 
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<DashboardGestorPage>();
+            builder.Services.AddTransient<DashboardProgramadorPage>();
+            builder.Services.AddTransient<AddProgramadorPage>();
+            builder.Services.AddTransient<CriarTarefaPage>();
+            builder.Services.AddTransient<EquipePage>();
+            builder.Services.AddTransient<DetalheProgramadorPage>();
+            builder.Services.AddTransient<EditarTarefaPage>();
+            builder.Services.AddTransient<KanbanPage>();
+            builder.Services.AddTransient<PerfilPage>();
+            builder.Services.AddTransient<RelatorioPage>();
+            builder.Services.AddTransient<TarefaConcluidaPage>();
+            builder.Services.AddTransient<TarefaDetailPage>();
+            builder.Services.AddTransient<TarefaListPage>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();

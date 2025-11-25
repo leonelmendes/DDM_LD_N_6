@@ -2,34 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iTask_App_Mobile.Views.CriarTarefaPage"
-             Title="CriarTarefaPage">
-    <ScrollView>
-        <VerticalStackLayout Spacing="0">
+             Title="CriarTarefaPage"
+             Shell.TabBarIsVisible="False">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="20" Spacing="10">
 
             <!-- Header azul misturado com o estilo dos dashboards -->
-            <Grid BackgroundColor="{StaticResource Primary}"
-                  Padding="16,40,16,16"
-                  RowDefinitions="Auto,Auto">
+            <VerticalStackLayout Spacing="10"  VerticalOptions="Center">
 
-                <Grid ColumnDefinitions="Auto,*,Auto">
-                    <Image Source="back_placeholder.png"
+                <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="15">
+                    <Image Source="voltar.png"
                            WidthRequest="22"
                            HeightRequest="22"
+                           HorizontalOptions="Start"
                            VerticalOptions="Center"/>
 
                     <Label Grid.Column="1"
                            Text="Nova Tarefa"
                            FontFamily="InterSemiBold"
                            FontSize="20"
-                           TextColor="White"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-
-                    <Image Grid.Column="2"
-                           Source="user_photo.png"
-                           WidthRequest="32"
-                           HeightRequest="32"
-                           HorizontalOptions="End"
                            VerticalOptions="Center"/>
                 </Grid>
 
@@ -37,98 +29,115 @@
                        Text="Crie uma nova tarefa e atribua a um programador."
                        FontFamily="InterRegular"
                        FontSize="13"
-                       TextColor="#E5F3FF"
                        Margin="0,10,0,0"/>
-            </Grid>
+            </VerticalStackLayout>
 
             <!-- Conteúdo -->
             <VerticalStackLayout Padding="20" Spacing="18">
 
                 <!-- Título -->
-                <Label Text="Título da tarefa"
-                       FontFamily="InterSemiBold"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray800}"/>
-                <Entry Placeholder="Digite o título da tarefa"
-                       FontFamily="InterRegular"
-                       BackgroundColor="{StaticResource Gray100}"
-                       HeightRequest="48"
-                       PlaceholderColor="{StaticResource Gray400}"/>
+                <StackLayout Spacing="8">
+                    <Label Text="Título da tarefa"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15" >
+                        <Entry Placeholder="Digite o titulo da tarefa"
+                               Text="{Binding Nome}"
+                               FontFamily="InterRegular"
+                               PlaceholderColor="{StaticResource Gray400}"/>
+                    </Frame>
+                </StackLayout>
 
                 <!-- Descrição -->
-                <Label Text="Descrição"
-                       FontFamily="InterSemiBold"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray800}"/>
-                <Editor Placeholder="Descreva os detalhes da tarefa"
-                        FontFamily="InterRegular"
-                        BackgroundColor="{StaticResource Gray100}"
-                        AutoSize="TextChanges"
-                        HeightRequest="110"
-                        PlaceholderColor="{StaticResource Gray400}"/>
+                <StackLayout Spacing="8">
+                    <Label Text="Descrição"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15" >
+                        <Editor Placeholder="Descreva os detalhes da tarefa"
+                                HeightRequest="100"
+                                Text="{Binding Nome}"
+                                AutoSize="TextChanges"
+                                FontFamily="InterRegular"
+                                PlaceholderColor="{StaticResource Gray400}"/>
+                    </Frame>
 
+                </StackLayout>
                 <!-- Data limite -->
-                <Label Text="Data limite"
-                       FontFamily="InterSemiBold"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray800}"/>
-                <Grid ColumnDefinitions="*,Auto"
-                      BackgroundColor="{StaticResource Gray100}"
-                      HeightRequest="48"
-                      Padding="10"
-                      VerticalOptions="Center">
-                    <Label Text="dd/mm/aaaa"
-                           VerticalOptions="Center"
-                           FontFamily="InterRegular"
-                           TextColor="{StaticResource Gray400}"/>
-                    <Image Grid.Column="1"
-                           Source="calendar_placeholder.png"
-                           WidthRequest="22"
-                           HeightRequest="22"
-                           VerticalOptions="Center"/>
-                </Grid>
+                <StackLayout Spacing="8">
+                    <Label Text="Data limite"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15" >
+                        <DatePicker Format="D"  FontFamily="InterRegular"/>
+                    </Frame>
+                </StackLayout>
 
                 <!-- Estado -->
-                <Label Text="Estado"
-                       FontFamily="InterSemiBold"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray800}"/>
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray100}"
-                       Padding="12,8">
-                    <Picker Title="Selecione o estado"
-                            FontFamily="InterRegular">
-                        <Picker.Items>
-                            <x:String>To Do</x:String>
-                            <x:String>Doing</x:String>
-                            <x:String>Done</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </Frame>
+                <StackLayout Spacing="8">
+                    <Label Text="Estado"
+                           FontFamily="InterSemiBold"
+                           FontSize="14" />
+                    <Frame CornerRadius="10" BackgroundColor="{StaticResource Gray100}"
+                           Padding="10,3" >
+                        <Grid >
+                            <Picker Title="Selecione o estado"
+                                FontFamily="InterRegular">
+                                <Picker.Items>
+                                    <x:String>To Do</x:String>
+                                    <x:String>Doing</x:String>
+                                    <x:String>Done</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Image HorizontalOptions="End" Source="seta_baixo2.png" HeightRequest="20" WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
 
                 <!-- Tipo de Tarefa -->
-                <Label Text="Tipo de tarefa"
-                       FontFamily="InterSemiBold"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray800}"/>
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray100}"
-                       Padding="12,8">
-                    <Picker Title="Selecione o tipo"
-                            FontFamily="InterRegular"/>
-                </Frame>
+                <StackLayout Spacing="8">
+                    <Label Text="Tipo de tarefa"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"/>
+                    <Frame CornerRadius="10" BackgroundColor="{StaticResource Gray100}"
+                           Padding="10,3">
+                        <Grid >
+                            <Picker Title="Selecione o tipo"
+                                    FontFamily="InterRegular">
+                                <Picker.Items>
+                                    <x:String>To Do</x:String>
+                                    <x:String>Doing</x:String>
+                                    <x:String>Done</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Image HorizontalOptions="End" Source="seta_baixo2.png" HeightRequest="20" WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
 
                 <!-- Atribuir a -->
-                <Label Text="Atribuir a"
-                       FontFamily="InterSemiBold"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray800}"/>
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource Gray100}"
-                       Padding="12,8">
-                    <Picker Title="Selecione um programador"
-                            FontFamily="InterRegular"/>
-                </Frame>
+                <StackLayout Spacing="8">
+                    <Label Text="Atribuir a"
+                           FontFamily="InterSemiBold"
+                           FontSize="14"/>
+                    <Frame CornerRadius="10" BackgroundColor="{StaticResource Gray100}"
+                           Padding="10,3">
+                        <Grid >
+                            <Picker Title="Selecione um programador"
+                                    FontFamily="InterRegular">
+                                <Picker.Items>
+                                    <x:String>To Do</x:String>
+                                    <x:String>Doing</x:String>
+                                    <x:String>Done</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Image HorizontalOptions="End" Source="seta_baixo2.png" HeightRequest="20" WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
 
                 <!-- Botão -->
                 <Button Text="✓  Salvar Tarefa"

@@ -4,7 +4,7 @@
              x:Class="iTask_App_Mobile.Views.KanbanPage"
              Title="KanbanPage">
     <ScrollView>
-        <VerticalStackLayout Padding="10,20" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- HEADER -->
             <Grid VerticalOptions="Center">

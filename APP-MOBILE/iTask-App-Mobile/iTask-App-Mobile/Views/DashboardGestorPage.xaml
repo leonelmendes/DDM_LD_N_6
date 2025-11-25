@@ -8,11 +8,6 @@
 
             <!-- HEADER -->
             <Grid ColumnDefinitions="Auto,*,Auto,Auto">
-                <Image
-                    Source="menu_icon.png"
-                    WidthRequest="28"
-                    HeightRequest="28"/>
-
                 <Label
                     Grid.Column="0"
                     Text="iTask"
@@ -20,18 +15,22 @@
                     FontSize="Title"
                     TextColor="Black"/>
 
-                <Image
-                    Grid.Column="2"
+                <Image Grid.Column="2"
                     Source="user.png"
                     WidthRequest="30"
                     HeightRequest="30"
-                    Aspect="AspectFill"/>
+                    Aspect="AspectFill">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PagePerfilCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
 
             <!-- Saudação -->
-            <VerticalStackLayout Margin="0,5">
-                <Label Text="Olá, João Silva"
-                       FontFamily="InterBold+-89"
+            <VerticalStackLayout>
+                <Label Text="{Binding Nome, StringFormat='Olá, {0:F0}'}"
+                       FontFamily="InterMedium"
+                       LineBreakMode="TailTruncation"
                        FontSize="Medium"
                        TextColor="{StaticResource Black}"/>
 
@@ -96,18 +95,19 @@
             <!-- Botão Nova Tarefa -->
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="20">
                 <Button Text="+ Nova Tarefa"
+                        Command="{Binding PageCriarTarefaCommand}"
                         FontFamily="InterSemiBold"
                         BackgroundColor="{StaticResource Primary}"
                         CornerRadius="10"
                         HeightRequest="48"/>
 
                 <Grid Grid.Column="1">
-                    <ImageButton Padding="12" WidthRequest="48" HeightRequest="48" Source="adicionar_programador.png" CornerRadius="12" BackgroundColor="{StaticResource Gray100}"/>
+                    <ImageButton Padding="12" Command="{Binding PageAddProgramadorCommand}" WidthRequest="48" HeightRequest="48" Source="adicionar_programador.png" CornerRadius="12" BackgroundColor="{StaticResource Gray100}"/>
                 </Grid>
             </Grid>
 
             <!-- EQUIPE -->
-            <Label Text="Equipe"
+            <Label Text="Minha Equipe"
                    FontFamily="InterSemiBold"
                    FontSize="Large"
                    TextColor="{StaticResource Black}"/>

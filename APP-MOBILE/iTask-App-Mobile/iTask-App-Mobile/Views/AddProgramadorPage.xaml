@@ -2,18 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iTask_App_Mobile.Views.AddProgramadorPage"
-             Title="AddProgramadorPage">
+             Title="AddProgramadorPage"
+             Shell.TabBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Spacing="10" Padding="20">
 
             <!-- Header -->
-            <VerticalStackLayout>
+            <VerticalStackLayout Spacing="10">
+                <Image Source="voltar.png"  HeightRequest="24" HorizontalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VoltarCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Label Text="Adicionar Programador"
                         Grid.Column="1"
                         FontFamily="InterSemiBold"
                         FontSize="Large"
                         VerticalOptions="Center"/>
-
                 <Label Text="Registe um novo programador para a sua equipa."
                        FontFamily="InterLight"
                        FontSize="13"/>

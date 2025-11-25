@@ -1,6 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using iTask_App_Mobile.DTOs;
 using iTask_App_Mobile.Services.AuthenticateService;
+using iTask_App_Mobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +24,7 @@ namespace iTask_App_Mobile.ViewModels
         {
             _service = service;
 
-            LoginCommand = new Command(async () => await RegistrarGestorAsync());
+            LoginCommand = new Command(async () => await LoginAsync());
             PageCadastrarCommand = new Command(NavigateToRegisterPage);
         }
         #endregion
@@ -34,6 +37,23 @@ namespace iTask_App_Mobile.ViewModels
         private string password;
         #endregion
 
+        #region Controls
+        SnackbarOptions snackbaroptionErro = new SnackbarOptions
+        {
+            BackgroundColor = Color.Parse("#cc3429"),
+            CornerRadius = 10,
+            ActionButtonTextColor = Colors.White,
+            TextColor = Colors.White,
+        };
+
+        SnackbarOptions snackbaroptionTrue = new SnackbarOptions
+        {
+            BackgroundColor = Colors.Green,
+            CornerRadius = 10,
+            TextColor = Colors.White,
+        };
+        #endregion
+
         #region Command
 
         public ICommand LoginCommand { get; }
@@ -42,7 +62,7 @@ namespace iTask_App_Mobile.ViewModels
         #endregion
 
         #region Métodos
-        private async Task RegistrarGestorAsync()
+        private async Task LoginAsync()
         {
             var model = new LoginRequestModel()
             {
@@ -52,15 +72,47 @@ namespace iTask_App_Mobile.ViewModels
 
             var resultado = await _service.LoginAsync(model);
 
-            if (!string.IsNullOrEmpty(resultado.Email))
+            if (resultado != null)
             {
-                await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
+                // SALVAR OS DADOS DO LOGIN - Sem muita segurança por enquanto
+                Preferences.Set("user_id", resultado.Id);
+                Preferences.Set("user_nome", resultado.Nome);
+                Preferences.Set("user_username", resultado.Username);
+                Preferences.Set("user_email", resultado.Email);
+                Preferences.Set("user_tipo", resultado.TipoUtilizador);
+                // Caso qeu quiser usar token futuramente o recomendo salvar em SecureStorage
+
+                var shell = (AppShell)Shell.Current;
+                if (resultado.TipoUtilizador == "Gestor")
+                {
+                    //shell.MostrarTabbarGestor();
+                    await Shell.Current.GoToAsync(state: $"//DashboardGestorPage");
+
+                    var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Gestor {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
+                    await snackbar.Show();
+                }
+                else
+                {
+                    //shell.MostrarTabbarProgramador();
+                    //await Shell.Current.GoToAsync(state: $"//DashboardProgramadorPage");
+                    Application.Current.MainPage = new ProgrammerShell();
+
+                    var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Programador {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
+                    await snackbar.Show();
+                }
+                //await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
+
+
+                //await Shell.Current.GoToAsync("..");
+
                 LimparCampos();
-                await Shell.Current.GoToAsync("..");
             }
             else
             {
                 await Shell.Current.DisplayAlert("Erro", "Não foi possível fazer o login.", "OK");
+                LimparCampos();
+                //var snackbar = Snackbar.Make("Erro ao efetuar login. Verifique as credenciais e tente novamente.", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionErro);
+                //await snackbar.Show();
             }
         }
         private void LimparCampos()

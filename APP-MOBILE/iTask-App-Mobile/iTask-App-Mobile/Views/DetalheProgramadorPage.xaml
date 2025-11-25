@@ -12,7 +12,7 @@
                 <Grid ColumnDefinitions="Auto,*,Auto">
 
                     <!-- Botão voltar (placeholder) -->
-                    <Image Source="back_placeholder.png"
+                    <Image Source="voltar.png"
                            WidthRequest="22"
                            HeightRequest="22"
                            VerticalOptions="Center"/>

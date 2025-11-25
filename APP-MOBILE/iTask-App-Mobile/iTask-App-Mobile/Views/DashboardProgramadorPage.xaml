@@ -8,12 +8,6 @@
 
             <!-- HEADER -->
             <Grid ColumnDefinitions="Auto,*,Auto,Auto">
-                <Image
-                    
-                     Source="menu_icon.png"
-                     WidthRequest="28"
-                     HeightRequest="28"/>
-
                 <Label
                      Grid.Column="0"
                      Text="iTask"

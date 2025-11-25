@@ -3,25 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iTask_App_Mobile.Views.PerfilPage"
              Title="PerfilPage">
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="10">
+    <ScrollView Padding="20" VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Spacing="15">
 
             <!-- HEADER -->
             <Grid >
-
                 <Grid ColumnDefinitions="Auto,*,Auto">
-
-                    <!-- Voltar -->
-                    <Image Source="back_placeholder.png"
-                           WidthRequest="22"
-                           HeightRequest="22"
-                           VerticalOptions="Center"/>
-
                     <Label Grid.Column="1"
                            Text="Meu Perfil"
                            FontFamily="InterSemiBold"
                            FontSize="20"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Start"/>
 
                     <Image Grid.Column="2"/>
                 </Grid>
@@ -30,7 +22,7 @@
 
 
             <!-- CABEÇALHO DO PERFIL -->
-            <VerticalStackLayout Padding="20" Spacing="14" HorizontalOptions="Center">
+            <VerticalStackLayout Spacing="0" HorizontalOptions="Center">
 
                 <Frame WidthRequest="100" HeightRequest="100"
                        CornerRadius="50"
@@ -40,13 +32,13 @@
                            Aspect="AspectFill"/>
                 </Frame>
 
-                <Label Text="Leonel Francisco"
+                <Label Text="{Binding Nome}"
                        FontFamily="InterSemiBold"
                        FontSize="22"
                        TextColor="{StaticResource Gray900}"
                        HorizontalOptions="Center"/>
 
-                <Label Text="Programador"
+                <Label Text="{Binding TipoUtilizador}"
                        FontFamily="InterRegular"
                        FontSize="14"
                        TextColor="{StaticResource Gray600}"
@@ -68,7 +60,7 @@
                         <Image Source="email_icon.png"
                                WidthRequest="20" HeightRequest="20"/>
                         <Label Grid.Column="1"
-                               Text="leonelftacisco@hotmail.com"
+                               Text="{Binding Email}"
                                FontFamily="InterRegular"
                                FontSize="14"
                                TextColor="{StaticResource Gray900}"/>
@@ -85,7 +77,7 @@
                         <Image Source="user_icon.png"
                                WidthRequest="20" HeightRequest="20"/>
                         <Label Grid.Column="1"
-                               Text="leonelfrancisco"
+                               Text="{Binding Username}"
                                FontFamily="InterRegular"
                                FontSize="14"
                                TextColor="{StaticResource Gray900}"/>
@@ -102,7 +94,7 @@
                         <Image Source="badge_icon.png"
                                WidthRequest="20" HeightRequest="20"/>
                         <Label Grid.Column="1"
-                               Text="Programador"
+                               Text="{Binding TipoUtilizador}"
                                FontFamily="InterSemiBold"
                                FontSize="14"
                                TextColor="{StaticResource Primary}"/>
@@ -111,15 +103,16 @@
 
                 <!-- Número de tarefas -->
                 <Frame BackgroundColor="{StaticResource Gray100}"
+                       IsVisible="False"
                        CornerRadius="14"
                        BorderColor="{StaticResource Gray200}"
-                       Padding="16"
+                       Padding="10"
                        HasShadow="False">
                     <Grid ColumnDefinitions="Auto,*">
                         <Image Source="tasks_icon.png"
                                WidthRequest="20" HeightRequest="20"/>
 
-                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" > 
                             <Label Text="Tarefas atribuídas"
                                    FontFamily="InterRegular"
                                    FontSize="13"
@@ -137,7 +130,7 @@
 
 
             <!-- BOTÕES DE AÇÃO -->
-            <VerticalStackLayout Padding="20" Spacing="12">
+            <VerticalStackLayout Padding="20,5" Spacing="12">
 
                 <!-- Editar perfil -->
                 <Frame BackgroundColor="{StaticResource Primary}"
@@ -152,10 +145,16 @@
                 </Frame>
 
                 <!-- Logout -->
-                <Button Text="Terminar Sessão"
-                        FontFamily="InterSemiBold"
-                        HeightRequest="50"
-                        BackgroundColor="Transparent"/>
+                <Frame CornerRadius="14"
+                       HasShadow="False"
+                       Padding="0">
+                    <Button Text="Terminar Sessão"
+                            FontFamily="InterSemiBold"
+                            Command="{Binding LogoutCommand}"
+                            TextColor="White"
+                            HeightRequest="50"
+                            BackgroundColor="Black"/>
+                </Frame>
 
             </VerticalStackLayout>
 
