@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
+﻿
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using iTask_App_Mobile.DTOs;
@@ -88,8 +88,10 @@ namespace iTask_App_Mobile.ViewModels
                     //shell.MostrarTabbarGestor();
                     await Shell.Current.GoToAsync(state: $"//DashboardGestorPage");
 
-                    var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Gestor {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
-                    await snackbar.Show();
+
+                    await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
+                    /*var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Gestor {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
+                    await snackbar.Show();*/
                 }
                 else
                 {
@@ -97,8 +99,10 @@ namespace iTask_App_Mobile.ViewModels
                     //await Shell.Current.GoToAsync(state: $"//DashboardProgramadorPage");
                     Application.Current.MainPage = new ProgrammerShell();
 
-                    var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Programador {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
-                    await snackbar.Show();
+
+                    await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
+                    /* var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Programador {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
+                     await snackbar.Show();*/
                 }
                 //await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
 

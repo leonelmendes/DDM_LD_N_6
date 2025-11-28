@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|c:\\users\\leone\\onedrive\\documentos\\aulas\\laboratorio-de-desenvolvimento-ii\\itask\\app-mobile\\itask-app-mobile\\itask-app-mobile\\views\\perfilpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|solutionrelative:itask-app-mobile\\views\\perfilpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|c:\\users\\leone\\onedrive\\documentos\\aulas\\laboratorio-de-desenvolvimento-ii\\itask\\app-mobile\\itask-app-mobile\\itask-app-mobile\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|solutionrelative:itask-app-mobile\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|c:\\users\\leone\\onedrive\\documentos\\aulas\\laboratorio-de-desenvolvimento-ii\\itask\\app-mobile\\itask-app-mobile\\itask-app-mobile\\viewmodels\\perfilpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|solutionrelative:itask-app-mobile\\viewmodels\\perfilpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|c:\\users\\leone\\onedrive\\documentos\\aulas\\laboratorio-de-desenvolvimento-ii\\itask\\app-mobile\\itask-app-mobile\\itask-app-mobile\\views\\perfilpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{B79D60BF-09A3-4152-9438-6407BFA3ACBB}|iTask-App-Mobile\\iTask-App-Mobile.csproj|solutionrelative:itask-app-mobile\\views\\perfilpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\MauiProgram.cs",
               "RelativeDocumentMoniker": "iTask-App-Mobile\\MauiProgram.cs",
@@ -51,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\App.xaml.cs",
               "RelativeDocumentMoniker": "iTask-App-Mobile\\App.xaml.cs",
@@ -64,20 +64,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "PerfilPage.xaml",
               "DocumentMoniker": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\Views\\PerfilPage.xaml",
               "RelativeDocumentMoniker": "iTask-App-Mobile\\Views\\PerfilPage.xaml",
               "ToolTip": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\Views\\PerfilPage.xaml",
               "RelativeToolTip": "iTask-App-Mobile\\Views\\PerfilPage.xaml",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAAAJcAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAAAGkAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-11-25T16:53:54.26Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "DashboardGestorPage.xaml",
               "DocumentMoniker": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\Views\\DashboardGestorPage.xaml",
               "RelativeDocumentMoniker": "iTask-App-Mobile\\Views\\DashboardGestorPage.xaml",
@@ -90,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AppShell.xaml",
               "DocumentMoniker": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\AppShell.xaml",
               "RelativeDocumentMoniker": "iTask-App-Mobile\\AppShell.xaml",
@@ -103,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PerfilPageViewModel.cs",
               "DocumentMoniker": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\ViewModels\\PerfilPageViewModel.cs",
               "RelativeDocumentMoniker": "iTask-App-Mobile\\ViewModels\\PerfilPageViewModel.cs",
