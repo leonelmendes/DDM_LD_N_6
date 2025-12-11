@@ -27,6 +27,11 @@
                           Route="EquipePage" />
         </Tab>
 
+        <Tab Title="Tarefas" Icon="tarefa.png">
+            <ShellContent ContentTemplate="{DataTemplate views:TarefaListPage}"
+                          Route="TarefaListPage" />
+        </Tab>
+
         <Tab Title="Relatórios" Icon="relatorio.png">
             <ShellContent ContentTemplate="{DataTemplate views:RelatorioPage}"
                           Route="RelatorioPage" />

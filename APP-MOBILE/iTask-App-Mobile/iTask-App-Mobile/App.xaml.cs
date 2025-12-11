@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Handlers;
+﻿using iTask_App_Mobile.Views;
+using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
 
 namespace iTask_App_Mobile

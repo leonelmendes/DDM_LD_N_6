@@ -9,6 +9,7 @@ using iTask_App_Mobile.Services.UtilizadorService;
 using iTask_App_Mobile.ViewModels;
 using iTask_App_Mobile.Views;
 using Microsoft.Extensions.Logging;
+using System.Text.Json.Serialization;
 
 namespace iTask_App_Mobile
 {
@@ -48,8 +49,21 @@ namespace iTask_App_Mobile
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<DashboardGestorPageViewModel>();
             builder.Services.AddTransient<PerfilPageViewModel>();
-
+            builder.Services.AddTransient<CriarTarefaPageViewModel>();
             builder.Services.AddTransient<LoginPageViewModel>();
+            builder.Services.AddTransient<DashboardProgramadorPage>();
+            builder.Services.AddTransient<AddProgramadorPageViewModel>();
+            builder.Services.AddTransient<EquipePageViewModel>();
+            builder.Services.AddTransient<DetalheProgramadorPageViewModel>();
+            builder.Services.AddTransient<KanbanPageViewModel>();
+            builder.Services.AddTransient<TarefaDetailPageViewModel>();
+            builder.Services.AddTransient<TarefaListPageViewModel>();
+            builder.Services.AddTransient<EditarTarefaPageViewModel>();
+            builder.Services.AddTransient<TarefasConcluidasPageViewModel>();
+            builder.Services.AddTransient<TarefasConcluidasGestorViewModel>();
+            builder.Services.AddTransient<RelatorioPageViewModel>();
+
+            // Views
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<DashboardGestorPage>();
             builder.Services.AddTransient<DashboardProgramadorPage>();
@@ -64,6 +78,7 @@ namespace iTask_App_Mobile
             builder.Services.AddTransient<TarefaConcluidaPage>();
             builder.Services.AddTransient<TarefaDetailPage>();
             builder.Services.AddTransient<TarefaListPage>();
+            builder.Services.AddTransient<TarefasConcluidasGestorViewModel>();
 
 
 #if DEBUG

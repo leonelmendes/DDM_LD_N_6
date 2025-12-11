@@ -7,6 +7,7 @@ using iTaskAPI.Repository.TipoTarefaRepository;
 using iTaskAPI.Repository.UtilizadorRepository;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using iTaskAPI.Repository.AuthRepository;
+using System.Text.Json.Serialization;
 //using iTaskAPI.Repository.Interfaces;
 //using iTaskAPI.Repository.Implementations;
 
@@ -26,7 +27,14 @@ builder.Services.AddScoped<ITipoTarefaRepository, TipoTarefaRepository>();
 builder.Services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
 builder.Services.AddScoped<IAuthenticateRepository, AuthenticateRepository>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+     {
+         // Esta linha impede o loop infinito se houver objetos aninhados
+         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+         // Opcional: formata o JSON bonito para leitura
+         options.JsonSerializerOptions.WriteIndented = true;
+     });
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,7 +52,7 @@ if (app.Environment.IsDevelopment())
 
 // teste conexao Console.WriteLine("Connection: " + builder.Configuration.GetConnectionString("PgConnection"));
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

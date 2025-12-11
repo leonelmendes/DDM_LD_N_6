@@ -132,7 +132,7 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
         // POST /api/authenticate/register-programmer
         // Regista um novo utilizador e cria um Programador vinculado a um Gestor existente
         [HttpPost("register-programmer")]
-        public async Task<ActionResult> RegisterProgrammer([FromQuery] int idGestor, [FromBody] RegisterProgrammerDTO data)
+        public async Task<ActionResult> RegisterProgrammer([FromBody] RegisterProgrammerDTO data)
         {
             if (data == null ||
                 string.IsNullOrEmpty(data.Username) ||
@@ -144,9 +144,9 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
                 return BadRequest("Todos os campos são obrigatórios.");
             }
 
-            var gestor = await _connection.Gestores.FindAsync(idGestor);
+            var gestor = await _connection.Gestores.FindAsync(data.IdGestor);
             if (gestor == null)
-                return NotFound($"Gestor com ID {idGestor} não encontrado.");
+                return NotFound($"Gestor com ID {data.IdGestor} não encontrado.");
 
             bool usernameExists = await _connection.Utilizadores.AnyAsync(u => u.Username == data.Username);
             bool emailExists = await _connection.Utilizadores.AnyAsync(u => u.Email == data.Email);
@@ -156,7 +156,7 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
             if (emailExists)
                 return Conflict("O email já está em uso.");
 
-            // 1️⃣ Cria o utilizador
+            // 1️ Cria o utilizador
             var utilizador = new Utilizador
             {
                 Nome = data.Nome,
@@ -168,10 +168,10 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
             await _connection.Utilizadores.AddAsync(utilizador);
             await _connection.SaveChangesAsync();
 
-            // 2️⃣ Cria o programador vinculado ao gestor
+            // 2️ Cria o programador vinculado ao gestor
             var programador = new Programador
             {
-                IdGestor = idGestor,
+                IdGestor = data.IdGestor,
                 IdUtilizador = utilizador.Id,
                 NivelExperiencia = data.NivelExperiencia
             };

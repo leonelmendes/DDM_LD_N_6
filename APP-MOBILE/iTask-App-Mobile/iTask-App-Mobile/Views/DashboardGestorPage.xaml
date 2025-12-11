@@ -1,181 +1,210 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:iTask_App_Mobile.DTOs"
+             xmlns:comp="clr-namespace:iTask_App_Mobile.Components"
              x:Class="iTask_App_Mobile.Views.DashboardGestorPage"
              Title="DashboardGestorPage">
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="10">
+        
+        <Grid RowDefinitions="Auto,*" Padding="20" RowSpacing="10">
 
             <!-- HEADER -->
-            <Grid ColumnDefinitions="Auto,*,Auto,Auto">
-                <Label
-                    Grid.Column="0"
-                    Text="iTask"
-                    FontFamily="InterSemiBold"
-                    FontSize="Title"
-                    TextColor="Black"/>
+            <StackLayout Spacing="10">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                    <Label
+                        Grid.Column="0"
+                        Text="iTask"
+                        FontFamily="InterSemiBold"
+                        FontSize="Title"
+                        TextColor="Black"/>
 
-                <Image Grid.Column="2"
-                    Source="user.png"
-                    WidthRequest="30"
-                    HeightRequest="30"
-                    Aspect="AspectFill">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding PagePerfilCommand}"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </Grid>
+                    <Image Grid.Column="2"
+                        Source="user.png"
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        Aspect="AspectFill">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PagePerfilCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
 
-            <!-- Saudação -->
-            <VerticalStackLayout>
-                <Label Text="{Binding Nome, StringFormat='Olá, {0:F0}'}"
-                       FontFamily="InterMedium"
-                       LineBreakMode="TailTruncation"
-                       FontSize="Medium"
-                       TextColor="{StaticResource Black}"/>
+                <!-- Saudação -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="{Binding Nome, StringFormat='Olá, {0:F0}'}"
+                           FontFamily="InterMedium"
+                           LineBreakMode="TailTruncation"
+                           FontSize="Medium"
+                           TextColor="{StaticResource Black}"/>
 
-                <Label Text="Gestor · 12 tarefas ativas"
-                       FontFamily="InterRegular"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray600}"/>
+                    <Label Text="Gestor · 12 tarefas ativas"
+                           FontFamily="InterRegular"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}"/>
+
+                <Frame Margin="0,10,0,0" CornerRadius="20" HasShadow="True" BorderColor="Transparent" Padding="0">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="{StaticResource Primary}" Offset="0.1" />
+                            <GradientStop Color="{StaticResource SecondaryDark}" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+
+                    <Grid ColumnDefinitions="*, Auto" Padding="20">
+
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                            <Label Text="Estimativa para zerar 'To Do'" 
+                               TextColor="#E0E7FF" 
+                               FontSize="12" 
+                               FontFamily="InterMedium"/>
+
+                            <Label Text="{Binding PrevisaoEntregaTexto}" 
+                               TextColor="White" 
+                               FontSize="26" 
+                               FontFamily="InterBold"/>
+
+                            <Label Text="Baseado na média da equipe" 
+                               TextColor="#C7D2FE" 
+                               FontSize="11" 
+                               FontFamily="InterRegular"/>
+                        </VerticalStackLayout>
+
+                        <Frame Grid.Column="1" 
+                           HeightRequest="50" WidthRequest="50" 
+                           CornerRadius="12" 
+                           BackgroundColor="#33FFFFFF" 
+                           Padding="0" 
+                           BorderColor="Transparent"
+                           VerticalOptions="Center">
+                            <Image Source="relogio_branco.png" 
+                               Aspect="AspectFit" 
+                               Margin="12"/>
+                        </Frame>
+                    </Grid>
+                </Frame>
             </VerticalStackLayout>
 
-            <!-- CARDS -->
-            <Grid ColumnDefinitions="*,*,*"
-                  ColumnSpacing="12"
-                  Padding="0,10">
+                <!-- CARDS -->
+                <Grid ColumnDefinitions="*,*,*"
+                      ColumnSpacing="12"
+                      Padding="0,10">
 
-                <Frame BackgroundColor="#FFF6E7" BorderColor="Transparent"
-                       CornerRadius="12"
-                       Padding="12"
-                       Grid.Column="0">
-                    <VerticalStackLayout>
-                        <Label Text="8"
-                               FontFamily="InterBold"
-                               FontSize="22"
-                               TextColor="#E47500"/>
-                        <Label Text="To Do"
-                               FontFamily="InterRegular"
-                               TextColor="#E47500"/>
-                    </VerticalStackLayout>
-                </Frame>
+                    <Frame BackgroundColor="#FFF6E7" BorderColor="Transparent"
+                           CornerRadius="12"
+                           Padding="12"
+                           Grid.Column="0">
+                        <VerticalStackLayout>
+                            <Label Text="8"
+                                   FontFamily="InterBold"
+                                   FontSize="22"
+                                   TextColor="#E47500"/>
+                            <Label Text="To Do"
+                                   FontFamily="InterRegular"
+                                   TextColor="#E47500"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-                <Frame BackgroundColor="#EAF0FF" BorderColor="Transparent"
-                       CornerRadius="12"
-                       Padding="12"
-                       Grid.Column="1">
-                    <VerticalStackLayout>
-                        <Label Text="5"
-                               FontFamily="InterBold"
-                               FontSize="22"
-                               TextColor="#3567F0"/>
-                        <Label Text="Doing"
-                               FontFamily="InterRegular"
-                               TextColor="#3567F0"/>
-                    </VerticalStackLayout>
-                </Frame>
+                    <Frame BackgroundColor="#EAF0FF" BorderColor="Transparent"
+                           CornerRadius="12"
+                           Padding="12"
+                           Grid.Column="1">
+                        <VerticalStackLayout>
+                            <Label Text="5"
+                                   FontFamily="InterBold"
+                                   FontSize="22"
+                                   TextColor="#3567F0"/>
+                            <Label Text="Doing"
+                                   FontFamily="InterRegular"
+                                   TextColor="#3567F0"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-                <Frame BackgroundColor="#EAF8E8" BorderColor="Transparent"
-                       CornerRadius="12"
-                       Padding="12"
-                       Grid.Column="2">
-                    <VerticalStackLayout>
-                        <Label Text="12"
-                               FontFamily="InterBold"
-                               FontSize="22"
-                               TextColor="#17A34A"/>
-                        <Label Text="Done"
-                               FontFamily="InterRegular"
-                               TextColor="#17A34A"/>
-                    </VerticalStackLayout>
-                </Frame>
+                    <Frame BackgroundColor="#EAF8E8" BorderColor="Transparent"
+                           CornerRadius="12"
+                           Padding="12"
+                           Grid.Column="2">
+                        <VerticalStackLayout>
+                            <Label Text="12"
+                                   FontFamily="InterBold"
+                                   FontSize="22"
+                                   TextColor="#17A34A"/>
+                            <Label Text="Done"
+                                   FontFamily="InterRegular"
+                                   TextColor="#17A34A"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-            </Grid>
-
-            <!-- Botão Nova Tarefa -->
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="20">
-                <Button Text="+ Nova Tarefa"
-                        Command="{Binding PageCriarTarefaCommand}"
-                        FontFamily="InterSemiBold"
-                        BackgroundColor="{StaticResource Primary}"
-                        CornerRadius="10"
-                        HeightRequest="48"/>
-
-                <Grid Grid.Column="1">
-                    <ImageButton Padding="12" Command="{Binding PageAddProgramadorCommand}" WidthRequest="48" HeightRequest="48" Source="adicionar_programador.png" CornerRadius="12" BackgroundColor="{StaticResource Gray100}"/>
                 </Grid>
-            </Grid>
 
+                <!-- Botão Nova Tarefa -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="20">
+                    <Button Text="+ Nova Tarefa"
+                            Command="{Binding PageCriarTarefaCommand}"
+                            FontFamily="InterSemiBold"
+                            BackgroundColor="{StaticResource Primary}"
+                            CornerRadius="10"
+                            HeightRequest="48"/>
+
+                    <Grid Grid.Column="1">
+                        <ImageButton Padding="12" Command="{Binding PageAddProgramadorCommand}" WidthRequest="48" HeightRequest="48" Source="adicionar_programador.png" CornerRadius="12" BackgroundColor="{StaticResource Gray100}"/>
+                    </Grid>
+                </Grid>
+
+            <Button Text="Tarefas Concluidas"
+                    Command="{Binding PageTarefaConcluidaGestorCommand}"
+                    FontFamily="InterSemiBold"
+                    BackgroundColor="{StaticResource SecondaryDark}"
+                    CornerRadius="10"/>
+
+        </StackLayout>
+            
             <!-- EQUIPE -->
-            <Label Text="Minha Equipe"
-                   FontFamily="InterSemiBold"
-                   FontSize="Large"
-                   TextColor="{StaticResource Black}"/>
+            <Grid Grid.Row="1" RowDefinitions="auto,*" RowSpacing="10">
+                <Label Text="Minha Equipe"
+                       FontFamily="InterSemiBold"
+                       FontSize="Large"
+                       TextColor="{StaticResource Black}"/>
 
-            <!-- Pessoa -->
-            <Frame BackgroundColor="White"
-                   CornerRadius="12"
-                   Padding="12"
-                   BorderColor="{StaticResource Gray200}">
-                <Grid ColumnDefinitions="Auto,*,Auto">
-                    <Frame Padding="0" BorderColor="Transparent" CornerRadius="12">
-                        <Image Source="person_1.png" WidthRequest="45" HeightRequest="45"/>
-                    </Frame>
+                <!-- Pessoa -->
 
-                    <VerticalStackLayout Grid.Column="1" Padding="10,0">
-                        <Label Text="Ana Costa"
-                               FontFamily="InterSemiBold"/>
-                        <Label Text="Frontend Developer"
-                               FontFamily="InterRegular"
-                               FontSize="13"
-                               TextColor="{StaticResource Gray600}"/>
-                    </VerticalStackLayout>
+                <RefreshView Grid.Row="1"
+                             Command="{Binding LoadEquipeDoGestorCommand}"
+                             IsRefreshing="{Binding IsLoading}"
+                             RefreshColor="{StaticResource Primary}">
 
-                    <VerticalStackLayout Grid.Column="2">
-                        <Label Text="4 tarefas"
-                               FontFamily="InterSemiBold"
-                               HorizontalOptions="End"/>
-                        <Label Text="2 concluídas"
-                               FontFamily="InterRegular"
-                               FontSize="13"
-                               TextColor="Green"
-                               HorizontalOptions="End"/>
-                    </VerticalStackLayout>
-                </Grid>
-            </Frame>
+                    <CollectionView ItemsSource="{Binding Programadores}" SelectionMode="None" VerticalScrollBarVisibility="Never">
 
-            <!-- Segunda pessoa -->
-            <Frame BackgroundColor="White"
-                   CornerRadius="12"
-                   Padding="12"
-                   BorderColor="{StaticResource Gray200}">
-                <Grid ColumnDefinitions="Auto,*,Auto">
-                    <Frame Padding="0" BorderColor="Transparent" CornerRadius="12">
-                        <Image Source="person_2.png" WidthRequest="45" HeightRequest="45"/>
-                    </Frame>
 
-                    <VerticalStackLayout Grid.Column="1" Padding="10,0">
-                        <Label Text="Carlos Lima"
-                               FontFamily="InterSemiBold"/>
-                        <Label Text="Backend Developer"
-                               FontFamily="InterRegular"
-                               FontSize="13"
-                               TextColor="{StaticResource Gray600}"/>
-                    </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="2">
-                        <Label Text="6 tarefas"
-                               FontFamily="InterSemiBold"
-                               HorizontalOptions="End"/>
-                        <Label Text="3 concluídas"
-                               FontFamily="InterRegular"
-                               FontSize="13"
-                               TextColor="Green"
-                               HorizontalOptions="End"/>
-                    </VerticalStackLayout>
-                </Grid>
-            </Frame>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:ProgramadorCardEquipeDTO">
+                                <comp:EquipeComponent />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.EmptyView>
+                            <Grid>
+                                <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                                                   IsVisible="{Binding IsLoading}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Color="{StaticResource Primary}"/>
+
+                                <Label Text="Nenhum programador encontrado." 
+                                       IsVisible="{Binding IsLoading}"
+                                       TextColor="{StaticResource Gray500}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </RefreshView>
+            </Grid>
+            
+        </Grid>
+
 </ContentPage>

@@ -82,6 +82,16 @@ namespace iTask_App_Mobile.ViewModels
                 Preferences.Set("user_tipo", resultado.TipoUtilizador);
                 // Caso qeu quiser usar token futuramente o recomendo salvar em SecureStorage
 
+                if (resultado.IdGestor != 0)
+                {
+                    Preferences.Set("gestor_id", resultado.IdGestor);
+                }
+                else
+                {
+                    Preferences.Set("programador_id", resultado.IdProgramador);
+
+                }
+
                 var shell = (AppShell)Shell.Current;
                 if (resultado.TipoUtilizador == "Gestor")
                 {
@@ -89,7 +99,7 @@ namespace iTask_App_Mobile.ViewModels
                     await Shell.Current.GoToAsync(state: $"//DashboardGestorPage");
 
 
-                    await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
+                    //await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
                     /*var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Gestor {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
                     await snackbar.Show();*/
                 }
@@ -100,7 +110,7 @@ namespace iTask_App_Mobile.ViewModels
                     Application.Current.MainPage = new ProgrammerShell();
 
 
-                    await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
+                    //await Shell.Current.DisplayAlert("Sucesso", $"{resultado.TipoUtilizador} {resultado.Nome}, Logado com sucesso!", "OK");
                     /* var snackbar = Snackbar.Make($"Login realizado com sucesso!\nBem Vindo Programador {resultado.Nome} ", null, "ok", TimeSpan.FromSeconds(3), snackbaroptionTrue);
                      await snackbar.Show();*/
                 }

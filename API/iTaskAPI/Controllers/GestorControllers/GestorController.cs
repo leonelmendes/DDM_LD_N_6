@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+using iTaskAPI.Models;
+using iTaskAPI.Models.DTOs;
 using iTaskAPI.Repository.GestorRepository;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using iTaskAPI.Models;
 
 namespace iTaskAPI.Controllers.GestorControllers
 {
@@ -49,7 +50,7 @@ namespace iTaskAPI.Controllers.GestorControllers
         // GET /api/gestor/{id}/programadores
         // Retorna todos os programadores do gestor
         [HttpGet("GetProgramadores/{id}/programadores")]
-        public async Task<ActionResult<IEnumerable<Programador>>> GetProgramadores(int id)
+        public async Task<ActionResult<IEnumerable<ProgramadorListDTO>>> GetProgramadores(int id)
         {
             IEnumerable<Programador> programadores = await _repository.GetProgramadoresByGestorAsync(id);
 
@@ -58,7 +59,15 @@ namespace iTaskAPI.Controllers.GestorControllers
                 return NotFound($"Nenhum programador encontrado para o gestor com ID {id}.");
             }
 
-            return Ok(programadores);
+            var dto = programadores.Select(p => new ProgramadorListDTO
+            {
+                Id = p.Id,
+                IdUtilizador = p.IdUtilizador,
+                NivelExperiencia = p.NivelExperiencia,
+                Nome = p.Utilizador.Nome   // 🔥 pega o nome aqui!
+            });
+
+            return Ok(dto);
         }
 
         // POST /api/gestor

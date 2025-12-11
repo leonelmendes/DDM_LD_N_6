@@ -17,7 +17,7 @@ namespace iTask_App_Mobile.Services.TipoTarefaService
 
         public async Task<List<TipoTarefaModel>> GetAllAsync()
         {
-            string url = $"{BaseUrl}/api/tipotarefa/all";
+            string url = $"{BaseUrl}/api/TipoTarefa/GetAll";
             using HttpClient client = new();
 
             return await client.GetFromJsonAsync<List<TipoTarefaModel>>(url);

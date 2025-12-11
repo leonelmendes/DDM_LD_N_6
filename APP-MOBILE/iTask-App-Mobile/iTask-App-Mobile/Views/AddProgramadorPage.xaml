@@ -32,7 +32,7 @@
                            FontSize="14"
                            TextColor="{StaticResource Gray900}"/>       
                     <Frame Padding="10,3" CornerRadius="15" >
-                        <Entry Placeholder="Digite o nome" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                        <Entry Text="{Binding Nome}" ReturnType="Send" ClearButtonVisibility="WhileEditing" Placeholder="Digite o nome" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
                     </Frame>
                 </StackLayout>
 
@@ -43,7 +43,7 @@
                            FontSize="14"
                            TextColor="{StaticResource Gray900}"/>
                     <Frame Padding="10,3" CornerRadius="15" >
-                        <Entry Placeholder="email@exemplo.com" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                        <Entry Text="{Binding Email}" Placeholder="email@exemplo.com" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
                     </Frame>
                 </StackLayout>
 
@@ -54,7 +54,7 @@
                            FontSize="14"
                            TextColor="{StaticResource Gray900}"/>
                     <Frame Padding="10,3" CornerRadius="15" >
-                        <Entry Placeholder="Nome de Utilizador" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                        <Entry Text="{Binding Username}" Placeholder="Nome de Utilizador" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
                     </Frame>
                 </StackLayout>
 
@@ -64,7 +64,7 @@
                            FontSize="14"
                            TextColor="{StaticResource Gray900}"/>
                     <Frame Padding="10,3" CornerRadius="15" >
-                        <Entry Placeholder="Defina uma password para o programador" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
+                        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Defina uma password para o programador" FontFamily="InterRegular" PlaceholderColor="{StaticResource Gray400}"/>
                     </Frame>
                 </StackLayout>
 
@@ -77,7 +77,7 @@
                            BackgroundColor="{StaticResource Gray100}"
                            Padding="10,3">
                         <Grid >
-                            <Picker Title="Selecione o nível" FontFamily="InterRegular" >
+                            <Picker Title="Selecione o nível" FontFamily="InterRegular" SelectedItem="{Binding NivelExperiencia}">
                                 <Picker.Items>
                                     <x:String>Júnior</x:String>
                                     <x:String>Pleno</x:String>
@@ -93,6 +93,7 @@
 
                 <!-- Botão -->
                 <Button Text="✓  Registrar Programador"
+                        Command="{Binding CreateProgramadorCommand}"
                         FontFamily="InterSemiBold"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"

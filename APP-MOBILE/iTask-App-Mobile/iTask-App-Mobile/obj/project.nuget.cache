@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MTagULzJ3wU=",
+  "dgSpecHash": "hTRb+TNL+Rg=",
   "success": true,
   "projectFilePath": "C:\\Users\\leone\\OneDrive\\Documentos\\Aulas\\Laboratorio-de-Desenvolvimento-II\\iTask\\APP-MOBILE\\iTask-App-Mobile\\iTask-App-Mobile\\iTask-App-Mobile.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "C:\\Users\\leone\\.nuget\\packages\\microsoft.web.webview2\\1.0.3179.45\\microsoft.web.webview2.1.0.3179.45.nupkg.sha512",
     "C:\\Users\\leone\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
     "C:\\Users\\leone\\.nuget\\packages\\microsoft.windowsappsdk\\1.7.250909003\\microsoft.windowsappsdk.1.7.250909003.nupkg.sha512",
+    "C:\\Users\\leone\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
     "C:\\Users\\leone\\.nuget\\packages\\runtime.any.system.collections\\4.3.0\\runtime.any.system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\leone\\.nuget\\packages\\runtime.any.system.globalization\\4.3.0\\runtime.any.system.globalization.4.3.0.nupkg.sha512",
     "C:\\Users\\leone\\.nuget\\packages\\runtime.any.system.io\\4.3.0\\runtime.any.system.io.4.3.0.nupkg.sha512",

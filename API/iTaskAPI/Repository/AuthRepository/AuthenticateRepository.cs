@@ -36,6 +36,7 @@ namespace iTaskAPI.Repository.AuthRepository
                     Nome = utilizador.Nome,
                     Username = utilizador.Username,
                     Email = utilizador.Email,
+                    IdGestor = gestor.Id,
                     TipoUtilizador = "Gestor"
                 };
             }
@@ -52,6 +53,7 @@ namespace iTaskAPI.Repository.AuthRepository
                     Nome = utilizador.Nome,
                     Username = utilizador.Username,
                     Email = utilizador.Email,
+                    IdProgramador = programador.Id,
                     TipoUtilizador = "Programador"
                 };
             }
@@ -62,6 +64,8 @@ namespace iTaskAPI.Repository.AuthRepository
                 Id = utilizador.Id,
                 Nome = utilizador.Nome,
                 Username = utilizador.Username,
+                IdGestor = 0,
+                IdProgramador = 0,
                 Email = utilizador.Email,
                 TipoUtilizador = "Desconhecido"
             };

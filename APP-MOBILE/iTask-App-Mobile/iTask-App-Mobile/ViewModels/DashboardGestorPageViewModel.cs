@@ -1,6 +1,11 @@
 ﻿using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using iTask_App_Mobile.DTOs;
 using iTask_App_Mobile.Services.GestorService;
+using iTask_App_Mobile.Services.ProgramadorService;
+using iTask_App_Mobile.Services.TarefaService;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace iTask_App_Mobile.ViewModels
@@ -9,16 +14,23 @@ namespace iTask_App_Mobile.ViewModels
     {
         #region Services
         private readonly IGestorService _service;
+        private readonly IProgramadorService _programadorService;
+        private readonly ITarefaService _tarefaService;
         #endregion
 
         #region Constructor
-        public DashboardGestorPageViewModel(IGestorService service)
+        public DashboardGestorPageViewModel(IGestorService service, IProgramadorService programadorService, ITarefaService tarefaService)
         {
+            _programadorService = programadorService;
+            _tarefaService = tarefaService;
             _service = service;
 
             PageCriarTarefaCommand = new Command(NavigateToCriarTarefaPage);
             PageAddProgramadorCommand = new Command(NavigateToAddProgramadorPage);
             PagePerfilCommand = new Command(NavigateToPerfilaPage);
+            PageTarefaConcluidaGestorCommand = new Command(NavigateToTarefaConcluidaGestor);
+
+            Programadores = new ObservableCollection<ProgramadorCardEquipeDTO>();
 
             CarregarDados();
         }
@@ -27,7 +39,16 @@ namespace iTask_App_Mobile.ViewModels
 
         #region Properties
         [ObservableProperty]
+        private string _previsaoEntregaTexto = "Calculando...";
+        [ObservableProperty]
+        private bool _temPrevisao = false;
+        [ObservableProperty]
         private string nome ;
+        [ObservableProperty]
+        private ObservableCollection<ProgramadorCardEquipeDTO> programadores;
+
+        [ObservableProperty]
+        private bool isLoading;
         #endregion
 
         #region Controls
@@ -52,10 +73,79 @@ namespace iTask_App_Mobile.ViewModels
         public ICommand PageCriarTarefaCommand { get; }
         public ICommand PageAddProgramadorCommand { get; }
         public ICommand PagePerfilCommand { get; }
+        public ICommand PageTarefaConcluidaGestorCommand { get; }
 
+        [RelayCommand]
+        public async Task LoadEquipeDoGestorAsync()
+        {
+            try
+            {
+                IsLoading = true;
+                // CHAMA O NOVO MÉTODO FILTRADO:
+                var lista = await _programadorService.GetByGestorAsync(Preferences.Get("gestor_id", 0));
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    Programadores.Clear();
+                    if (lista != null)
+                    {
+                        foreach (var item in lista)
+                        {
+                            Programadores.Add(item);
+                        }
+                    }
+                });
+                IsLoading = false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Erro: {ex.Message}");
+            }
+            finally
+            {
+                MainThread.BeginInvokeOnMainThread(() => { IsLoading = false; });
+                await CarregarDashboard();
+            }
+            IsLoading = false;
+        }
+
+        public async Task CarregarDashboard()
+        {
+            try
+            {
+                // Chama a API (lógica que explicamos na resposta anterior)
+                double horasTotais = await _tarefaService.GetPrevisaoEntregaAsync();
+
+                if (horasTotais > 0)
+                {
+                    TimeSpan ts = TimeSpan.FromHours(horasTotais);
+
+                    // Formatação bonita
+                    if (ts.Days > 0)
+                        PrevisaoEntregaTexto = $"{ts.Days} dias e {ts.Hours}h";
+                    else
+                        PrevisaoEntregaTexto = $"{ts.Hours} horas";
+
+                    TemPrevisao = true;
+                }
+                else
+                {
+                    PrevisaoEntregaTexto = "Tudo em dia!";
+                    TemPrevisao = false;
+                }
+            }
+            catch
+            {
+                PrevisaoEntregaTexto = "--";
+            }
+        }
         #endregion
 
         #region Métodos
+        private async void NavigateToTarefaConcluidaGestor()
+        {
+            await Shell.Current.GoToAsync(state: "/TarefasConcluidasGestorPage");
+        }
         private async void NavigateToAddProgramadorPage()
         {
             await Shell.Current.GoToAsync(state: "/AddProgramadorPage");

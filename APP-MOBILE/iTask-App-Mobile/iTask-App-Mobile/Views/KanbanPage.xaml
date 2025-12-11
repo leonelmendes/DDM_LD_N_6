@@ -1,238 +1,115 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:iTask_App_Mobile.Models"
              x:Class="iTask_App_Mobile.Views.KanbanPage"
+             xmlns:vm="clr-namespace:iTask_App_Mobile.ViewModels"
              Title="KanbanPage">
+
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="24">
 
-            <!-- HEADER -->
-            <Grid VerticalOptions="Center">
+            <Label Text="Quadro de Tarefas" 
+                   FontAttributes="Bold" 
+                   FontSize="22" 
+                   TextColor="#111827"/>
 
-                <VerticalStackLayout>
-                    <Label Text="Kanban"
-                           FontFamily="InterSemiBold"
-                           FontSize="22"
-                           TextColor="{StaticResource Black}"/>
-                    <Label Text="Olá, Leonel Francisco..." FontFamily="InterLight"/>
-                </VerticalStackLayout>
+            <Frame CornerRadius="16" BackgroundColor="#FFF7ED" BorderColor="#FFEDD5" Padding="16">
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True" Drop="OnDropToDo"/>
+                </Frame.GestureRecognizers>
 
-            </Grid>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="To Do" FontAttributes="Bold" FontSize="16" TextColor="#C2410C"/>
 
-            <!-- 🟥 TO DO -->
-            <Frame CornerRadius="16"
-                   BackgroundColor="#FFF5E8"
-                   Padding="16">
+                    <StackLayout BindableLayout.ItemsSource="{Binding ToDoList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:TarefaModel">
 
-                <VerticalStackLayout Spacing="16">
+                                <Frame BackgroundColor="White" Padding="12" CornerRadius="10" Margin="0,0,0,10" HasShadow="True" BorderColor="Transparent">
 
-                    <HorizontalStackLayout Spacing="10">
-                        <Image Source="relogio.png"
-                               WidthRequest="20"
-                               HeightRequest="20"/>
+                                    <Frame.GestureRecognizers>
+                                        <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:KanbanPageViewModel}}, Path=VerDetalhesCommand}"
+                                          CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
 
-                        <Label Text="To Do (8)"
-                               Grid.Column="1"
-                               FontFamily="InterSemiBold"
-                               FontSize="18"
-                               TextColor="#C46A00"/>
-                    </HorizontalStackLayout>
+                                    <VerticalStackLayout Spacing="6" InputTransparent="True">
+                                        <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="14" TextColor="#1F2937"/>
+                                        <Label Text="{Binding Descricao}" FontSize="12" TextColor="#6B7280" LineBreakMode="TailTruncation"/>
+                                        <Image Source="dotnet_bot.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
+                                    </VerticalStackLayout>
 
-                    <!-- Card Tarefa -->
-                    <Frame BackgroundColor="White"
-                           Padding="14"
-                           CornerRadius="14"
-                           BorderColor="#FFE1BE">
-
-                        <VerticalStackLayout Spacing="6">
-
-                            <Label Text="Implementar autenticação"
-                                   FontFamily="InterSemiBold"
-                                   FontSize="16"/>
-
-                            <Label Text="Criar sistema de login e registro com JWT"
-                                   FontFamily="InterRegular"
-                                   FontSize="13"
-                                   TextColor="{StaticResource Gray600}"/>
-
-                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6">
-
-                                <HorizontalStackLayout Spacing="5">
-                                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="25">
-                                        <Image Source="person_1.png" WidthRequest="40" HeightRequest="40"/>
-                                    </Frame>
-
-                                    <Label Text="Carlos"
-                                           FontFamily="InterRegular"
-                                           FontSize="13"
-                                           VerticalOptions="Center"
-                                           TextColor="{StaticResource Gray600}"/>
-                                </HorizontalStackLayout>
-
-                                <!-- Data -->
-                                <Frame Grid.Column="2"
-                                       BackgroundColor="#FFE3C4"
-                                       VerticalOptions="Center"
-                                       Padding="6,2"
-                                       CornerRadius="6">
-                                    <Label Text="15 Jan"
-                                           FontFamily="InterMedium"
-                                           FontSize="12"
-                                           TextColor="#C46A00"/>
                                 </Frame>
 
-                            </Grid>
-
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
-
-            </Frame>
-
-            <!-- 🟦 DOING -->
-            <Frame CornerRadius="16"
-                   BackgroundColor="#EAF0FF"
-                   Padding="16">
-
-                <VerticalStackLayout Spacing="16">
-
-                    <HorizontalStackLayout Spacing="10">
-                        <Image Source="play.png"
-                               WidthRequest="20"
-                               HeightRequest="20"/>
-
-                        <Label Text="Doing (5)"
-                               Grid.Column="1"
-                               FontFamily="InterSemiBold"
-                               FontSize="18"
-                               TextColor="#3567F0"/>
-                    </HorizontalStackLayout>
-
-                    <!-- Card DOING -->
-                    <Frame BackgroundColor="White"
-                           Padding="14"
-                           CornerRadius="14"
-                           BorderColor="#CCE0FF">
-
-                        <VerticalStackLayout Spacing="6">
-
-                            <Label Text="API de tarefas"
-                                   FontFamily="InterSemiBold"
-                                   FontSize="16"/>
-
-                            <Label Text="Desenvolver endpoints CRUD"
-                                   FontFamily="InterRegular"
-                                   FontSize="13"
-                                   TextColor="{StaticResource Gray600}"/>
-
-                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6">
-
-                                <HorizontalStackLayout Spacing="5">
-                                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="25">
-                                        <Image Source="person_2.png"
-                                                WidthRequest="40"
-                                                HeightRequest="40"/>        
-                                    </Frame>
-
-                                    <Label Text="Vitoria"
-                                            FontFamily="InterRegular"
-                                            FontSize="13"
-                                            VerticalOptions="Center"
-                                            TextColor="{StaticResource Gray600}"/>
-                                </HorizontalStackLayout>
-
-                                <Frame Grid.Column="2"
-                                       BackgroundColor="#DCE8FF"
-                                       VerticalOptions="Center"
-                                       Padding="6,2"
-                                       CornerRadius="6">
-                                    <Label Text="12 Jan"
-                                           FontFamily="InterMedium"
-                                           FontSize="12"
-                                           TextColor="#3567F0"/>
-                                </Frame>
-
-                            </Grid>
-
-                        </VerticalStackLayout>
-                    </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- 🟩 DONE -->
-            <Frame CornerRadius="16"
-                   BackgroundColor="#E4F7E8"
-                   Padding="16">
+            <Frame CornerRadius="16" BackgroundColor="#EFF6FF" BorderColor="#DBEAFE" Padding="16">
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True" Drop="OnDropDoing"/>
+                </Frame.GestureRecognizers>
 
-                <VerticalStackLayout Spacing="16">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Doing" FontAttributes="Bold" FontSize="16" TextColor="#2563EB"/>
 
-                    <HorizontalStackLayout Spacing="10">
-                        <Image Source="verificar.png" WidthRequest="20" HeightRequest="20"/>
+                    <StackLayout BindableLayout.ItemsSource="{Binding DoingList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:TarefaModel">
 
-                        <Label Text="Done (12)"
-                               Grid.Column="1"
-                               FontFamily="InterSemiBold"
-                               FontSize="18"
-                               TextColor="#148C41"/>
+                                <Frame BackgroundColor="White" Padding="12" CornerRadius="10" Margin="0,0,0,10" HasShadow="True" BorderColor="Transparent">
+                                    <Frame.GestureRecognizers>
+                                        <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:KanbanPageViewModel}}, Path=VerDetalhesCommand}"
+                                          CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
 
-                        <Image Grid.Column="2"
-                               Source="arrow_down_placeholder.png"
-                               WidthRequest="18"/>
-                    </HorizontalStackLayout>
-
-                    <Frame BackgroundColor="White"
-                           Padding="14"
-                           CornerRadius="14"
-                           BorderColor="#BBEBC6">
-
-                        <VerticalStackLayout Spacing="6">
-
-                            <Label Text="Setup inicial do projeto"
-                                   FontFamily="InterSemiBold"
-                                   FontSize="16"/>
-
-                            <Label Text="Configurar React Native e dependências"
-                                   FontFamily="InterRegular"
-                                   FontSize="13"
-                                   TextColor="{StaticResource Gray600}"/>
-
-                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,6">
-
-                                <HorizontalStackLayout Spacing="5">
-                                    <Frame  WidthRequest="26" HeightRequest="26" CornerRadius="25">
-                                        <Image Source="person_3.png"
-                                               WidthRequest="26"
-                                               HeightRequest="26"/>
-                                    </Frame>
-
-                                    <Label Text="Ana"
-                                           Grid.Column="1"
-                                           FontFamily="InterRegular"
-                                           FontSize="13"
-                                           TextColor="{StaticResource Gray600}"
-                                           VerticalOptions="Center"/>
-
-                                </HorizontalStackLayout>
-                                
-                                <Frame Grid.Column="2"
-                                       BackgroundColor="#C6EDCF"
-                                       VerticalOptions="Center"
-                                       Padding="6,2"
-                                       CornerRadius="6">
-                                    <Label Text="10 Jan"
-                                           FontFamily="InterMedium"
-                                           FontSize="12"
-                                           TextColor="#148C41"/>
+                                    <VerticalStackLayout Spacing="6" InputTransparent="True">
+                                        <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="14" TextColor="#1F2937"/>
+                                        <Label Text="{Binding Descricao}" FontSize="12" TextColor="#6B7280" LineBreakMode="TailTruncation"/>
+                                        <Image Source="dotnet_bot.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
+                                    </VerticalStackLayout>
                                 </Frame>
 
-                            </Grid>
-
-                        </VerticalStackLayout>
-
-                    </Frame>
-
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </VerticalStackLayout>
+            </Frame>
 
+            <Frame CornerRadius="16" BackgroundColor="#F0FDF4" BorderColor="#DCFCE7" Padding="16">
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True" Drop="OnDropDone"/>
+                </Frame.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Done" FontAttributes="Bold" FontSize="16" TextColor="#16A34A"/>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding DoneList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:TarefaModel">
+
+                                <Frame BackgroundColor="White" Padding="12" CornerRadius="10" Margin="0,0,0,10" HasShadow="True" BorderColor="Transparent">
+                                    <Frame.GestureRecognizers>
+                                        <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:KanbanPageViewModel}}, Path=VerDetalhesCommand}"
+                                          CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <VerticalStackLayout Spacing="6" InputTransparent="True">
+                                        <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="14" TextColor="#1F2937"/>
+                                        <Label Text="{Binding Descricao}" FontSize="12" TextColor="#6B7280" LineBreakMode="TailTruncation"/>
+                                        <Image Source="dotnet_bot.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </VerticalStackLayout>
             </Frame>
 
         </VerticalStackLayout>

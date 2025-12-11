@@ -2,62 +2,78 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iTask_App_Mobile.Components.EquipeComponent">
-    
-    <Frame BackgroundColor="White"
-           CornerRadius="14"
-           Padding="14"
-           HasShadow="True"
-           BorderColor="{StaticResource Gray100}">      
-        <Grid ColumnDefinitions="Auto,*,Auto">
-            <Frame WidthRequest="50" HeightRequest="50" BorderColor="Transparent" CornerRadius="25">
-                <Image Source="person_1.png"
-                   WidthRequest="50"
-                   HeightRequest="50" />
-            </Frame>
 
-            <StackLayout Grid.Column="1" Padding="10,0" Spacing="2">
-                <Label Text="{Binding Nome}"
-                       FontFamily="InterSemiBold"/>
-                <Label Text="{Binding NivelExperiencia}"
-                       FontFamily="InterRegular"
-                       FontSize="13"
-                       TextColor="{StaticResource Gray600}"/>
+    <ContentView.Content>
+        <Frame BackgroundColor="White"
+               CornerRadius="15"
+               Padding="10"
+               HasShadow="True">
 
-                <HorizontalStackLayout Spacing="10" Margin="0,4,0,0">
-                    <Label Text="{Binding Ativas}"
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Frame WidthRequest="50" HeightRequest="50" BorderColor="Transparent" CornerRadius="25" IsClippedToBounds="True" Padding="0">
+                    <Image Source="person_1.png"
+                           Aspect="AspectFill"
+                           WidthRequest="50"
+                           HeightRequest="50" />
+                </Frame>
+
+                <StackLayout Grid.Column="1" Padding="10,0" Spacing="2">
+                    <Label Text="{Binding Nome}"
+                           FontFamily="InterSemiBold"
+                           TextColor="{StaticResource Gray900}"/>
+
+                    <Label Text="{Binding NivelExperiencia}"
                            FontFamily="InterRegular"
-                           FontSize="12"
+                           FontSize="13"
                            TextColor="{StaticResource Gray600}"/>
-                    <Label Text="{Binding Concluidas}"
+
+                    <HorizontalStackLayout Spacing="10" Margin="0,4,0,0">
+                        <Label Text="{Binding Ativas, StringFormat='{0} ativas'}"
+                               FontFamily="InterRegular"
+                               FontSize="12"
+                               TextColor="{StaticResource Gray600}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Ativas}" Value="0">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Label Text="●" FontSize="8" VerticalOptions="Center" TextColor="{StaticResource Gray300}"/>
+
+                        <Label Text="{Binding Concluidas, StringFormat='{0} concluídas'}"
+                               FontFamily="InterRegular"
+                               FontSize="12"
+                               TextColor="Green"/>
+                    </HorizontalStackLayout>
+
+                    <Grid Margin="0,6,0,0">
+                        <BoxView HeightRequest="4"
+                                 CornerRadius="2"
+                                 WidthRequest="160"
+                                 HorizontalOptions="Start"
+                                 BackgroundColor="{StaticResource Gray200}"/>
+
+                        <BoxView HeightRequest="4"
+                                 CornerRadius="2"
+                                 BackgroundColor="{StaticResource Primary}"
+                                 WidthRequest="{Binding ProgressoWidth}" 
+                                 HorizontalOptions="Start"/>
+                    </Grid>
+
+                    <Label Text="{Binding TaxaConclusao, StringFormat='Taxa de conclusão {0}%'}"
                            FontFamily="InterRegular"
-                           FontSize="12"
-                           TextColor="Green"/>
-                </HorizontalStackLayout>
+                           FontSize="11"
+                           TextColor="{StaticResource Gray600}"
+                           Margin="0,2,0,0"/>
+                </StackLayout>
 
-                <!-- Barra de progresso -->
-                <Grid Margin="0,6,0,0">
-                    <BoxView HeightRequest="4"
-                             CornerRadius="2"
-                             BackgroundColor="{StaticResource Gray200}"/>
-                    <BoxView HeightRequest="4"
-                             CornerRadius="2"
-                             BackgroundColor="{StaticResource Primary}"
-                             WidthRequest="160"
-                             HorizontalOptions="Start"/>
-                </Grid>
-
-                <Label Text="Taxa de conclusão 71%"
-                       FontFamily="InterRegular"
-                       FontSize="11"
-                       TextColor="{StaticResource Gray600}"
-                       Margin="0,2,0,0"/>
-            </StackLayout>
-
-            <Image Grid.Column="2"
-                   Source="more_vert_placeholder.png"
-                   WidthRequest="18"
-                   HorizontalOptions="End"
-                   VerticalOptions="Start"/>
-        </Grid>
-    </Frame>
+                <Image Grid.Column="2"
+                       Source="more_vert_placeholder.png"
+                       WidthRequest="18"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start"/>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
 </ContentView>
