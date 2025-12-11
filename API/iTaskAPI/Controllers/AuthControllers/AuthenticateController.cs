@@ -2,6 +2,7 @@ using iTaskAPI.Connection;
 using iTaskAPI.Models;
 using iTaskAPI.Models.DTOs;
 using iTaskAPI.Repository.AuthRepository;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,30 +25,21 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
         // POST /api/authenticate/login
         // Faz o login de um utilizador existente
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] Utilizador loginData)
+        public async Task<ActionResult> Login([FromBody] LoginRequestDTO loginData)
         {
             if (loginData == null || string.IsNullOrEmpty(loginData.Username) || string.IsNullOrEmpty(loginData.Password))
             {
                 return BadRequest("Credenciais inválidas.");
             }
 
-            Utilizador? utilizador = await _repository.LoginAsync(loginData.Username, loginData.Password);
+            var utilizador = await _repository.LoginAsync(loginData.Username, loginData.Password);
 
             if (utilizador == null)
             {
                 return Unauthorized("Username ou senha incorretos.");
             }
 
-            return Ok(new
-            {
-                message = "Login realizado com sucesso.",
-                user = new
-                {
-                    utilizador.Id,
-                    utilizador.Nome,
-                    utilizador.Username
-                }
-            });
+            return Ok(utilizador);
         }
 
         // POST /api/authenticate/register
@@ -140,7 +132,7 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
         // POST /api/authenticate/register-programmer
         // Regista um novo utilizador e cria um Programador vinculado a um Gestor existente
         [HttpPost("register-programmer")]
-        public async Task<ActionResult> RegisterProgrammer([FromQuery] int idGestor, [FromBody] RegisterProgrammerDTO data)
+        public async Task<ActionResult> RegisterProgrammer([FromBody] RegisterProgrammerDTO data)
         {
             if (data == null ||
                 string.IsNullOrEmpty(data.Username) ||
@@ -152,9 +144,9 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
                 return BadRequest("Todos os campos são obrigatórios.");
             }
 
-            var gestor = await _connection.Gestores.FindAsync(idGestor);
+            var gestor = await _connection.Gestores.FindAsync(data.IdGestor);
             if (gestor == null)
-                return NotFound($"Gestor com ID {idGestor} não encontrado.");
+                return NotFound($"Gestor com ID {data.IdGestor} não encontrado.");
 
             bool usernameExists = await _connection.Utilizadores.AnyAsync(u => u.Username == data.Username);
             bool emailExists = await _connection.Utilizadores.AnyAsync(u => u.Email == data.Email);
@@ -164,7 +156,7 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
             if (emailExists)
                 return Conflict("O email já está em uso.");
 
-            // 1️⃣ Cria o utilizador
+            // 1️ Cria o utilizador
             var utilizador = new Utilizador
             {
                 Nome = data.Nome,
@@ -176,10 +168,10 @@ namespace iTaskAPI.Controllers.AuthenticateControllers
             await _connection.Utilizadores.AddAsync(utilizador);
             await _connection.SaveChangesAsync();
 
-            // 2️⃣ Cria o programador vinculado ao gestor
+            // 2️ Cria o programador vinculado ao gestor
             var programador = new Programador
             {
-                IdGestor = idGestor,
+                IdGestor = data.IdGestor,
                 IdUtilizador = utilizador.Id,
                 NivelExperiencia = data.NivelExperiencia
             };

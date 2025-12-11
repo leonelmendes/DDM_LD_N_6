@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:iTask_App_Mobile.DTOs"
+             xmlns:comp="clr-namespace:iTask_App_Mobile.Components"
+             xmlns:vm="clr-namespace:iTask_App_Mobile.ViewModels"
+             x:Class="iTask_App_Mobile.Views.EquipePage"
+             Title="EquipePage">
+
+    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="20">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="20">
+
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="0,10">
+                <Image Source="back_placeholder.png" WidthRequest="22" HeightRequest="22" VerticalOptions="Center"/>
+
+                <StackLayout Grid.Column="1" HorizontalOptions="Center">
+                    <Label Text="Equipe" FontFamily="InterSemiBold" FontSize="22" HorizontalOptions="Center"/>
+                    <Label Text="Gestor - Lista de Programadores" FontFamily="InterRegular" FontSize="13" TextColor="{StaticResource Gray600}" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <ImageButton Grid.Column="2" 
+                             Source="refresh_placeholder.png" 
+                             Command="{Binding LoadDataCommand}"
+                             WidthRequest="22" 
+                             HeightRequest="22" 
+                             HorizontalOptions="End" 
+                             VerticalOptions="Center"/>
+            </Grid>
+
+            <Button Text="+  Adicionar Programador"
+                    FontFamily="InterSemiBold"
+                    Command="{Binding GoToAddProgramadorCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    CornerRadius="14"
+                    HeightRequest="50"/>
+        </VerticalStackLayout>
+
+        <RefreshView Grid.Row="1" 
+                     Command="{Binding LoadDataCommand}"
+                     IsRefreshing="{Binding IsLoading}"
+                     RefreshColor="{StaticResource Primary}">
+
+            <CollectionView ItemsSource="{Binding Programadores}" 
+                            SelectionMode="Single" SelectedItem="{Binding SelectedProgramador}"
+                            VerticalScrollBarVisibility="Never"
+                            SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+
+
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ProgramadorCardEquipeDTO">
+                        <comp:EquipeComponent InputTransparent="True"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <Grid>
+                        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                                           IsVisible="{Binding IsLoading}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Color="{StaticResource Primary}"/>
+
+                        <Label Text="Nenhum programador encontrado." 
+                               IsVisible="{Binding IsLoading}"
+                               TextColor="{StaticResource Gray500}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </CollectionView.EmptyView>
+
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

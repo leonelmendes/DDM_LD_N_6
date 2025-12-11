@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.EditarTarefaPage"
+             xmlns:vm="clr-namespace:iTask_App_Mobile.ViewModels"
+             Title="EditarTarefaPage"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                    <Image Source="voltar.png" WidthRequest="22" HeightRequest="22" HorizontalOptions="Start" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding VoltarCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.Column="1" Text="{Binding TituloPagina}" FontFamily="InterSemiBold" FontSize="20" HorizontalOptions="Start" VerticalOptions="Center"/>
+                </Grid>
+                <Label Text="Edite os detalhes da tarefa." FontFamily="InterRegular" FontSize="13" Margin="0,10,0,0"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="20,10,20,20" Spacing="18">
+
+                <StackLayout Spacing="8">
+                    <Label Text="Título da tarefa" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15">
+                        <Entry Text="{Binding Tarefa.Titulo}" FontFamily="InterRegular" Placeholder="Digite o titulo"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="8">
+                    <Label Text="Descrição" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15">
+                        <Editor HeightRequest="100" Text="{Binding Tarefa.Descricao}" AutoSize="TextChanges" FontFamily="InterRegular"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="8">
+                    <Label Text="Gestor Criador" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15" BackgroundColor="{StaticResource Gray100}" BorderColor="Transparent">
+                        <Entry Text="{Binding Tarefa.GestorNome}" IsReadOnly="True" TextColor="Gray" FontFamily="InterRegular"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="8">
+                    <Label Text="Programador" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15" BackgroundColor="{StaticResource Gray100}" BorderColor="Transparent">
+                        <Entry Text="{Binding Tarefa.ProgramadorNome}" IsReadOnly="True" TextColor="Gray" FontFamily="InterRegular"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="8">
+                    <Label Text="Ordem de Execução" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15">
+                        <Entry Text="{Binding Tarefa.OrdemExecucao}" FontFamily="InterRegular" Keyboard="Numeric"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="8">
+                    <Label Text="Story Points" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15">
+                        <Entry Text="{Binding Tarefa.StoryPoints}" FontFamily="InterRegular" Keyboard="Numeric"/>
+                    </Frame>
+                </StackLayout>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <StackLayout Grid.Column="0" Spacing="8">
+                        <Label Text="Data Prevista Início" FontFamily="InterSemiBold" FontSize="14"/>
+                        <Frame Padding="10,3" CornerRadius="15">
+                            <DatePicker Date="{Binding Tarefa.DataPrevistaInicio}" Format="d" FontFamily="InterRegular"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1" Spacing="8">
+                        <Label Text="Data Prevista Fim" FontFamily="InterSemiBold" FontSize="14"/>
+                        <Frame Padding="10,3" CornerRadius="15">
+                            <DatePicker Date="{Binding Tarefa.DataPrevistaFim}" Format="d" FontFamily="InterRegular"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <StackLayout Grid.Column="0" Spacing="8">
+                        <Label Text="Data Real Início" FontFamily="InterSemiBold" FontSize="14"/>
+                        <Frame Padding="10,3" CornerRadius="15" BackgroundColor="{StaticResource Gray100}" BorderColor="Transparent">
+                            <DatePicker Date="{Binding Tarefa.DataRealInicio}" Format="d" IsEnabled="False" FontFamily="InterRegular" TextColor="Gray"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1" Spacing="8">
+                        <Label Text="Data Real Fim" FontFamily="InterSemiBold" FontSize="14"/>
+                        <Frame Padding="10,3" CornerRadius="15" BackgroundColor="{StaticResource Gray100}" BorderColor="Transparent">
+                            <DatePicker Date="{Binding Tarefa.DataRealFim}" Format="d" IsEnabled="False" FontFamily="InterRegular" TextColor="Gray"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Spacing="8">
+                    <Label Text="Tipo de Tarefa" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15">
+                        <Picker ItemsSource="{Binding TiposTarefa}"
+                                ItemDisplayBinding="{Binding Nome}"
+                                SelectedItem="{Binding TipoTarefaSelecionado}"
+                                Title="Selecione o tipo"
+                                FontFamily="InterRegular"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="8">
+                    <Label Text="ID Programador (Trocar Dev)" FontFamily="InterSemiBold" FontSize="14"/>
+                    <Frame Padding="10,3" CornerRadius="15">
+                        <Entry Text="{Binding Tarefa.IdProgramador}" Keyboard="Numeric" FontFamily="InterRegular"/>
+                    </Frame>
+                </StackLayout>
+
+                <Button Text="✓ Salvar Tarefa"
+                        Command="{Binding SalvarTarefaCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        CornerRadius="14"
+                        HeightRequest="52"
+                        Margin="0,10,0,20"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

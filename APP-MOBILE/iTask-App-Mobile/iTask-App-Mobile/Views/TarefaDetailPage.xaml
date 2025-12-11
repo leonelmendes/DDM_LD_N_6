@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.TarefaDetailPage"
+             Title="TarefaDetailPage"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Image Source="voltar.png"  HeightRequest="24" HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Label Text="Título" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry IsReadOnly="True" Text="{Binding Tarefa.Titulo}" Placeholder="Digite o título da tarefa"/>
+            </Frame>
+
+            <Label Text="Descrição" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Editor IsReadOnly="True" Text="{Binding Tarefa.Descricao}" HeightRequest="100"/>
+
+            </Frame>
+
+            <Label Text="Ordem Execução" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry IsReadOnly="True" Text="{Binding Tarefa.OrdemExecucao}" Keyboard="Numeric" Placeholder="Ex: 1, 2, 3"/>
+
+            </Frame>
+
+            <Label Text="Programador" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry IsReadOnly="True" Text="{Binding Tarefa.IdProgramador}" Keyboard="Numeric" Placeholder="Nome do Programador" />
+
+            </Frame>
+
+            <Label Text="Gestor" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry IsReadOnly="True" Text="{Binding Tarefa.IdGestor}" Keyboard="Numeric" Placeholder="Nome do Programador"/>
+
+            </Frame>
+
+            <Label Text="Tipo Tarefa" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry Text="{Binding Tarefa.IdTipoTarefa}" Keyboard="Numeric" Placeholder="Tipo de Tarefa"/>
+            </Frame>
+
+            <Label Text="Story Points" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry Text="{Binding Tarefa.StoryPoints}" Keyboard="Numeric" Placeholder="Story Point"/>
+
+            </Frame>
+
+            <Label Text="Estado Atual" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <Entry IsReadOnly="True" Text="{Binding Tarefa.EstadoAtual}" Placeholder="Ex: To Do"/>
+            </Frame>
+
+            <Label Text="Data Prevista Fim" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <DatePicker IsEnabled="False" Date="{Binding Tarefa.DataPrevistaFim}"/>
+            </Frame>
+
+            <Label Text="Data Prevista Inicio" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <DatePicker IsEnabled="False" Date="{Binding Tarefa.DataPrevistaInicio}"/>
+
+            </Frame>
+
+            <Label Text="Data Real Inicio" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <DatePicker IsEnabled="False" Date="{Binding Tarefa.DataRealInicio}"/>
+
+            </Frame>
+
+            <Label Text="Data Real Fim" FontAttributes="Bold"/>
+            <Frame Padding="10,3" CornerRadius="15">
+                <DatePicker IsEnabled="False" Date="{Binding Tarefa.DataRealFim}"/>
+
+            </Frame>
+
+            <Button Text="Editar Tarefa"/>
+        </VerticalStackLayout>
+    </ScrollView> 
+</ContentPage>

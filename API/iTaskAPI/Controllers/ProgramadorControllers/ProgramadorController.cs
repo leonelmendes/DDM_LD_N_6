@@ -1,4 +1,5 @@
 using iTaskAPI.Models;
+using iTaskAPI.Models.DTOs;
 using iTaskAPI.Repository.ProgramadorRepository;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,6 +32,25 @@ namespace iTaskAPI.Controllers.ProgramadorControllers
             return Ok(programadores);
         }
 
+        [HttpPut("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProgramadorProfileDTO dto)
+        {
+            try
+            {
+                var sucesso = await _repository.UpdatePerfilProgramadorAsync(dto);
+                if (!sucesso) return NotFound("Perfil não encontrado.");
+                return Ok("Perfil atualizado com sucesso.");
+            }
+            catch (InvalidOperationException ex) // <--- Captura o erro de username duplicado
+            {
+                return BadRequest(ex.Message); // Retorna erro 400 com a mensagem
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Erro interno ao atualizar.");
+            }
+        }
+
         // GET /api/programador/{id}
         // Retorna um programador específico
         [HttpGet("GetById/{id}")]
@@ -41,6 +61,60 @@ namespace iTaskAPI.Controllers.ProgramadorControllers
             if (programador == null)
             {
                 return NotFound($"Programador com ID {id} não encontrado.");
+            }
+
+            return Ok(programador);
+        }
+
+        // GET /api/programador/EquipeCards
+        // Retorna os cards de programadores para a equipe
+        [HttpGet("EquipeCards")]
+        public async Task<ActionResult<List<ProgramadorCardEquipeDTO>>> GetEquipeCards()
+        {
+            try
+            {
+                var resultado = await _repository.GetProgramadoresParaEquipeAsync();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                // Logar o erro se tiveres logger
+                return StatusCode(500, "Erro interno ao buscar equipe: " + ex.Message);
+            }
+        }
+
+        [HttpGet("DashboardProgramador/{idUtilizador}")]
+        public async Task<IActionResult> GetDashboardProgramador(int idUtilizador)
+        {
+            var dados = await _repository.GetDashboardProgramadorAsync(idUtilizador);
+            return Ok(dados);
+        }
+
+        // GET /api/programador/EquipeCards/{idGestor}
+        // Retorna os cards de programadores para a equipe de um gestor específico
+        [HttpGet("EquipeCards/{idGestor}")]
+        public async Task<ActionResult<List<ProgramadorCardEquipeDTO>>> GetEquipeCardsPorGestor(int idGestor)
+        {
+            try
+            {
+                var equipe = await _repository.GetProgramadoresPorGestorAsync(idGestor);
+                return Ok(equipe);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
+        }
+
+        // GET 
+        [HttpGet("{id}/detalhe")]
+        public async Task<ActionResult<ProgramadorDetalhe>> GetDetalhe(int id)
+        {
+            var programador = await _repository.GetDetalheByIdAsync(id);
+
+            if (programador == null)
+            {
+                return NotFound("Programador não encontrado.");
             }
 
             return Ok(programador);
@@ -78,27 +152,34 @@ namespace iTaskAPI.Controllers.ProgramadorControllers
         // PUT /api/programador/{id}
         // Atualiza um programador existente
         [HttpPut("Update/{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] Programador programador)
+        public async Task<ActionResult> Update(int id, [FromBody] ProgramadorDetalhe programador)
         {
+            // 1. Validação de consistência da Requisição
             if (id != programador.Id)
             {
-                return BadRequest("O ID informado não corresponde ao ID do programador.");
+                return BadRequest(new { mensagem = "O ID da URL difere do ID do corpo da requisição." });
             }
 
-            Programador? existente = await _repository.GetByIdAsync(id);
-
-            if (existente == null)
+            // 2. Validação dos campos (Data Annotations do DTO)
+            if (!ModelState.IsValid)
             {
-                return NotFound($"Programador com ID {id} não encontrado.");
+                return BadRequest(ModelState);
             }
 
-            existente.NivelExperiencia = programador.NivelExperiencia;
-            existente.IdGestor = programador.IdGestor;
-            existente.IdUtilizador = programador.IdUtilizador;
+            // 3. Chamada ao Repositório
+            // A mágica da atualização das tabelas (Programador, Utilizador, Gestor) acontece aqui dentro
+            var atualizado = await _repository.UpdateAsync(programador);
 
-            await _repository.UpdateAsync(existente);
+            // 4. Tratamento do Resultado
+            if (!atualizado)
+            {
+                // Se retornou false, assumimos que o ID não existe no banco
+                return NotFound(new { mensagem = $"Programador com ID {id} não encontrado." });
+            }
 
-            return Ok("Programador atualizado com sucesso.");
+            // 5. Retorno de Sucesso (204 No Content)
+            // Significa: "Deu tudo certo, não tenho conteúdo novo para te mostrar"
+            return NoContent();
         }
 
         // DELETE /api/programador/{id}

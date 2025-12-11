@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.LoginPage"
+             Title="LoginPage"
+             Padding="20,0">
+    <Grid VerticalOptions="Center" Padding="20">
+        <VerticalStackLayout Spacing="10">
+            <Image Source="logo_sem_fundo.png"
+                   HeightRequest="150"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,0"/>
+            <Label Text="iTask" FontFamily="InterBold"
+                   FontSize="30"
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="Gestão de Tarefas Kanban" FontFamily="InterRegular" HorizontalTextAlignment="Center"/>
+            <StackLayout Margin="0,20,0,0" Spacing="10">
+                <Frame Padding="10,3" CornerRadius="15" >
+                    <Entry Placeholder="Username" Text="{Binding Username}" FontFamily="InterRegular" x:Name="UsernameEntry" PlaceholderColor="{StaticResource Gray400}"/>
+                </Frame>
+                <Frame Padding="10,3" CornerRadius="15">
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" FontFamily="InterRegular" x:Name="SenhaEntry" PlaceholderColor="{StaticResource Gray400}"/>
+                </Frame>
+            </StackLayout>
+
+            <Button Text="Entrar" Command="{Binding LoginCommand}" FontSize="Medium" Margin="0,20"/>
+
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Não tem uma conta? " FontFamily="InterLigth"/>
+                        <Span Text="Registre-se" FontFamily="InterLigth" TextColor="{StaticResource Primary}">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PageCadastrarCommand}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

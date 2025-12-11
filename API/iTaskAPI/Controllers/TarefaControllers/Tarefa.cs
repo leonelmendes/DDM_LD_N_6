@@ -1,4 +1,5 @@
 using iTaskAPI.Models;
+using iTaskAPI.Models.DTOs;
 using iTaskAPI.Repository.TarefaRepository;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +31,32 @@ namespace iTaskAPI.Controllers.TarefaControllers
 
             return Ok(tarefas);
         }
-        
+
+        [HttpGet("GetAllTarefasDetalhes")]
+        [ProducesResponseType(typeof(IEnumerable<TarefaDetalhesDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllTarefasDetalhes()
+        {
+            var tarefas = await _repository.GetAllTarefasDetalhesAsync();
+
+            if (tarefas == null || !tarefas.Any())
+            {
+                return NotFound("Nenhuma tarefa detalhada encontrada.");
+            }
+
+            return Ok(tarefas);
+        }
+
+        [HttpGet("PrevisaoTempoToDo")]
+        public async Task<IActionResult> GetPrevisaoTempo()
+        {
+            // Apenas Gestores podem ver isso (regra 28)
+
+            double horas = await _repository.CalcularPrevisaoTempoToDoAsync();
+
+            // Retorna um objeto simples ou apenas o número
+            return Ok(new { TotalHorasPrevistas = horas, TotalDiasPrevistos = horas / 24.0 });
+        }
+
         // GET /api/tarefa/{id}
         // Retorna uma tarefa específica pelo ID
         // ============================================================
@@ -45,6 +71,13 @@ namespace iTaskAPI.Controllers.TarefaControllers
             }
 
             return Ok(tarefa);
+        }
+
+        [HttpGet("DashboardGlobal")]
+        public async Task<IActionResult> GetDashboardGlobal()
+        {
+            var dados = await _repository.GetDashboardGlobalAsync();
+            return Ok(dados);
         }
 
         // GET /api/tarefa/gestor/{gestorId}
@@ -89,7 +122,8 @@ namespace iTaskAPI.Controllers.TarefaControllers
 
             await _repository.AddAsync(tarefa);
 
-            return CreatedAtAction(nameof(GetById), new { id = tarefa.Id }, tarefa);
+            return CreatedAtAction(nameof(GetById), new { id = tarefa.Id },
+                tarefa);
         }
 
         // PUT /api/tarefa/{id}
@@ -126,8 +160,8 @@ namespace iTaskAPI.Controllers.TarefaControllers
 
         // PATCH /api/tarefa/{id}/estado
         // Atualiza somente o estado da tarefa (To Do, Doing, Done)
-        [HttpPatch("{id}/estado")]
-        public async Task<ActionResult> AtualizarEstado(int id, [FromBody] string novoEstado)
+        [HttpPatch("{id}/{novoEstado}")]
+        public async Task<ActionResult> AtualizarEstado(int id, string novoEstado)
         {
             Tarefa? tarefa = await _repository.GetByIdAsync(id);
 
@@ -136,9 +170,7 @@ namespace iTaskAPI.Controllers.TarefaControllers
                 return NotFound($"Tarefa com ID {id} não encontrada.");
             }
 
-            tarefa.EstadoAtual = novoEstado;
-
-            await _repository.UpdateAsync(tarefa);
+            await _repository.AtualizarEstadoAsync(id, novoEstado);
 
             return Ok($"Estado da tarefa atualizado para: {novoEstado}");
         }

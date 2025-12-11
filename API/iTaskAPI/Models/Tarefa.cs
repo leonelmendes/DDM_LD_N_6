@@ -11,6 +11,10 @@ namespace iTaskAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string? Titulo { get; set; }
+
         [ForeignKey("Gestor")]
         [Required]
         public int IdGestor { get; set; }
@@ -35,11 +39,9 @@ namespace iTaskAPI.Models
         public DateTime? DataPrevistaFim { get; set; }
         [Required]
         public int? StoryPoints { get; set; }
-        [Required]
+
         public DateTime? DataRealInicio { get; set; }
-        [Required]
         public DateTime? DataRealFim { get; set; }
-        [Required]
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 
         [Required]

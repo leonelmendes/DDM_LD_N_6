@@ -87,19 +87,19 @@ namespace iTaskAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("DataPrevistaFim")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("DataPrevistaInicio")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
-                    b.Property<DateTime>("DataRealFim")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime?>("DataRealFim")
+                        .HasColumnType("timestamp");
 
-                    b.Property<DateTime>("DataRealInicio")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime?>("DataRealInicio")
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -127,6 +127,11 @@ namespace iTaskAPI.Migrations
 
                     b.Property<int>("StoryPoints")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 

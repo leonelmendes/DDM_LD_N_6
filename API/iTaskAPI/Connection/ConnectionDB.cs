@@ -15,6 +15,27 @@ namespace iTaskAPI.Connection
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configurar colunas DateTime como timestamp (SEM timezone)
+            modelBuilder.Entity<Tarefa>()
+                .Property(t => t.DataPrevistaInicio)
+                .HasColumnType("timestamp");
+
+            modelBuilder.Entity<Tarefa>()
+                .Property(t => t.DataPrevistaFim)
+                .HasColumnType("timestamp");
+
+            modelBuilder.Entity<Tarefa>()
+                .Property(t => t.DataRealInicio)
+                .HasColumnType("timestamp");
+
+            modelBuilder.Entity<Tarefa>()
+                .Property(t => t.DataRealFim)
+                .HasColumnType("timestamp");
+
+            modelBuilder.Entity<Tarefa>()
+                .Property(t => t.DataCriacao)
+                .HasColumnType("timestamp");
+
             // Índices únicos para Email e Username
             modelBuilder.Entity<Utilizador>()
                 .HasIndex(u => u.Email)

@@ -14,12 +14,12 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("iTask-App-Mobile")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+ea752697f201670c09e5bef141881dfdebe97a2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67b436b9d11219919c04633254ad6fefb8aaa861")]
 [assembly: System.Reflection.AssemblyProductAttribute("iTask-App-Mobile")]
 [assembly: System.Reflection.AssemblyTitleAttribute("iTask-App-Mobile")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
-[assembly: System.Runtime.Versioning.TargetPlatformAttribute("Android34.0")]
-[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Android21.0")]
+[assembly: System.Runtime.Versioning.TargetPlatformAttribute("android21.0")]
+[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("android21.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
 

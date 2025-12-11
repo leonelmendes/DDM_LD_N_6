@@ -1,5 +1,6 @@
 using iTaskAPI.Connection;
 using iTaskAPI.Models;
+using iTaskAPI.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTaskAPI.Repository.AuthRepository
@@ -15,12 +16,59 @@ namespace iTaskAPI.Repository.AuthRepository
 
         // POST /api/authenticate/login
         // Faz o login do utilizador validando username e password
-        public async Task<Utilizador?> LoginAsync(string username, string password)
+        public async Task<LoginResponseDTO?> LoginAsync(string username, string password)
         {
-            Utilizador? utilizador = await _connection.Utilizadores
+            var utilizador = await _connection.Utilizadores
                 .FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
 
-            return utilizador;
+            if (utilizador == null)
+                return null;
+
+            // Verifica se é gestor
+            var gestor = await _connection.Gestores
+                .FirstOrDefaultAsync(g => g.IdUtilizador == utilizador.Id);
+
+            if (gestor != null)
+            {
+                return new LoginResponseDTO
+                {
+                    Id = utilizador.Id,
+                    Nome = utilizador.Nome,
+                    Username = utilizador.Username,
+                    Email = utilizador.Email,
+                    IdGestor = gestor.Id,
+                    TipoUtilizador = "Gestor"
+                };
+            }
+
+            // Verifica se é programador
+            var programador = await _connection.Programadores
+                .FirstOrDefaultAsync(p => p.IdUtilizador == utilizador.Id);
+
+            if (programador != null)
+            {
+                return new LoginResponseDTO
+                {
+                    Id = utilizador.Id,
+                    Nome = utilizador.Nome,
+                    Username = utilizador.Username,
+                    Email = utilizador.Email,
+                    IdProgramador = programador.Id,
+                    TipoUtilizador = "Programador"
+                };
+            }
+
+            // Se não for nenhum (caso raro)
+            return new LoginResponseDTO
+            {
+                Id = utilizador.Id,
+                Nome = utilizador.Nome,
+                Username = utilizador.Username,
+                IdGestor = 0,
+                IdProgramador = 0,
+                Email = utilizador.Email,
+                TipoUtilizador = "Desconhecido"
+            };
         }
 
         // POST /api/authenticate/register

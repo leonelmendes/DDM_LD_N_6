@@ -3,13 +3,45 @@
     x:Class="iTask_App_Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:iTask_App_Mobile"
+    xmlns:views="clr-namespace:iTask_App_Mobile.Views"
     Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
     Title="iTask_App_Mobile">
 
+
+    <!-- ====================== LOGIN ====================== -->
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="LoginPage"
+        ContentTemplate="{DataTemplate views:LoginPage}" />
+
+    <!-- ==================== TABBAR GESTOR ==================== -->
+    <TabBar x:Name="TabBar_Gestor" IsVisible="True">
+
+        <Tab Title="Dashboard" Icon="casa.png">
+            <ShellContent ContentTemplate="{DataTemplate views:DashboardGestorPage}"
+                          Route="DashboardGestorPage" />
+        </Tab>
+
+        <Tab Title="Equipe" Icon="equipe.png">
+            <ShellContent ContentTemplate="{DataTemplate views:EquipePage}"
+                          Route="EquipePage" />
+        </Tab>
+
+        <Tab Title="Tarefas" Icon="tarefa.png">
+            <ShellContent ContentTemplate="{DataTemplate views:TarefaListPage}"
+                          Route="TarefaListPage" />
+        </Tab>
+
+        <Tab Title="Relatórios" Icon="relatorio.png">
+            <ShellContent ContentTemplate="{DataTemplate views:RelatorioPage}"
+                          Route="RelatorioPage" />
+        </Tab>
+
+        <Tab Title="Perfil" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate views:PerfilPage}"
+                          Route="PerfilPage" />
+        </Tab>
+
+    </TabBar>
 
 </Shell>

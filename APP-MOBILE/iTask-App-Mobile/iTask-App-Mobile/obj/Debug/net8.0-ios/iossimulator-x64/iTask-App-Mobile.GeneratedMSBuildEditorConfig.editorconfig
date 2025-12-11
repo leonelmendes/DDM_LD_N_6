@@ -3,6 +3,11 @@ build_property.EnableAotAnalyzer =
 build_property.EnableSingleFileAnalyzer = 
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property._MvvmToolkitIsUsingWindowsRuntimePack = false
+build_property.CsWinRTComponent = 
+build_property.CsWinRTAotOptimizerEnabled = 
+build_property.CsWinRTAotWarningLevel = 
 build_property.TargetFramework = net8.0-ios
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
@@ -30,11 +35,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.AppShell.
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Components/EquipeComponent.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Components.EquipeComponent.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\EquipeComponent.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\EquipeComponent.xaml
+
 [C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/ProgrammerShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.ProgrammerShell.xaml
+build_metadata.AdditionalFiles.TargetPath = ProgrammerShell.xaml
+build_metadata.AdditionalFiles.RelativePath = ProgrammerShell.xaml
 
 [C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -47,3 +64,93 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/AddProgramadorPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.AddProgramadorPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\AddProgramadorPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\AddProgramadorPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/CriarTarefaPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.CriarTarefaPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CriarTarefaPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CriarTarefaPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/DashboardGestorPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.DashboardGestorPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\DashboardGestorPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\DashboardGestorPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/DashboardProgramadorPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.DashboardProgramadorPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\DashboardProgramadorPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\DashboardProgramadorPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/DetalheProgramadorPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.DetalheProgramadorPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\DetalheProgramadorPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\DetalheProgramadorPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/EditarTarefaPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.EditarTarefaPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EditarTarefaPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EditarTarefaPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/EquipePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.EquipePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EquipePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EquipePage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/KanbanPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.KanbanPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\KanbanPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\KanbanPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/PerfilPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.PerfilPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\PerfilPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\PerfilPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RegisterPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/RelatorioPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.RelatorioPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RelatorioPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RelatorioPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/TarefaConcluidaPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.TarefaConcluidaPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TarefaConcluidaPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TarefaConcluidaPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/TarefaDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.TarefaDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TarefaDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TarefaDetailPage.xaml
+
+[C:/Users/leone/OneDrive/Documentos/Aulas/Laboratorio-de-Desenvolvimento-II/iTask/APP-MOBILE/iTask-App-Mobile/iTask-App-Mobile/Views/TarefaListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = iTask_App_Mobile.Views.TarefaListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TarefaListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TarefaListPage.xaml

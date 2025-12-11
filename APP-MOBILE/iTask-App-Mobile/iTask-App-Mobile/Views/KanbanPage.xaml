@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:iTask_App_Mobile.Models"
+             x:Class="iTask_App_Mobile.Views.KanbanPage"
+             xmlns:vm="clr-namespace:iTask_App_Mobile.ViewModels"
+             Title="KanbanPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="24">
+
+            <Label Text="Quadro de Tarefas" 
+                   FontAttributes="Bold" 
+                   FontSize="22" 
+                   TextColor="#111827"/>
+
+            <Frame CornerRadius="16" BackgroundColor="#FFF7ED" BorderColor="#FFEDD5" Padding="16">
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True" Drop="OnDropToDo"/>
+                </Frame.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="To Do" FontAttributes="Bold" FontSize="16" TextColor="#C2410C"/>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding ToDoList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:TarefaModel">
+
+                                <Frame BackgroundColor="White" Padding="12" CornerRadius="10" Margin="0,0,0,10" HasShadow="True" BorderColor="Transparent">
+
+                                    <Frame.GestureRecognizers>
+                                        <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:KanbanPageViewModel}}, Path=VerDetalhesCommand}"
+                                          CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <VerticalStackLayout Spacing="6" InputTransparent="True">
+                                        <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="14" TextColor="#1F2937"/>
+                                        <Label Text="{Binding Descricao}" FontSize="12" TextColor="#6B7280" LineBreakMode="TailTruncation"/>
+                                        <Image Source="dotnet_bot.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
+                                    </VerticalStackLayout>
+
+                                </Frame>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="16" BackgroundColor="#EFF6FF" BorderColor="#DBEAFE" Padding="16">
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True" Drop="OnDropDoing"/>
+                </Frame.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Doing" FontAttributes="Bold" FontSize="16" TextColor="#2563EB"/>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding DoingList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:TarefaModel">
+
+                                <Frame BackgroundColor="White" Padding="12" CornerRadius="10" Margin="0,0,0,10" HasShadow="True" BorderColor="Transparent">
+                                    <Frame.GestureRecognizers>
+                                        <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:KanbanPageViewModel}}, Path=VerDetalhesCommand}"
+                                          CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <VerticalStackLayout Spacing="6" InputTransparent="True">
+                                        <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="14" TextColor="#1F2937"/>
+                                        <Label Text="{Binding Descricao}" FontSize="12" TextColor="#6B7280" LineBreakMode="TailTruncation"/>
+                                        <Image Source="dotnet_bot.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="16" BackgroundColor="#F0FDF4" BorderColor="#DCFCE7" Padding="16">
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer AllowDrop="True" Drop="OnDropDone"/>
+                </Frame.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Done" FontAttributes="Bold" FontSize="16" TextColor="#16A34A"/>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding DoneList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:TarefaModel">
+
+                                <Frame BackgroundColor="White" Padding="12" CornerRadius="10" Margin="0,0,0,10" HasShadow="True" BorderColor="Transparent">
+                                    <Frame.GestureRecognizers>
+                                        <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:KanbanPageViewModel}}, Path=VerDetalhesCommand}"
+                                          CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <VerticalStackLayout Spacing="6" InputTransparent="True">
+                                        <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="14" TextColor="#1F2937"/>
+                                        <Label Text="{Binding Descricao}" FontSize="12" TextColor="#6B7280" LineBreakMode="TailTruncation"/>
+                                        <Image Source="dotnet_bot.png" WidthRequest="20" HeightRequest="20" HorizontalOptions="Start"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

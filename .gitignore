@@ -1,0 +1,33 @@
+# VS & VSCode
+.vs/
+.vscode/
+
+# Build outputs
+bin/
+obj/
+
+# MAUI / Android
+**/android/bin/
+**/android/obj/
+**/Resources/Resource.designer.cs
+
+# Neto 8 / ASP.NET API
+API/**/bin/
+API/**/obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Cache
+*.cache
+*.db
+*.pid
+*.lock
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp

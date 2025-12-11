@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.ProgrammerShell"
+             xmlns:views="clr-namespace:iTask_App_Mobile.Views"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             Title="ProgrammerShell">
+    
+    <!-- ================== TABBAR PROGRAMADOR ================== -->
+    <TabBar x:Name="TabBar_Programador" IsVisible="True">
+
+        <Tab Title="Dashboard" Icon="casa.png">
+            <ShellContent ContentTemplate="{DataTemplate views:DashboardProgramadorPage}"
+                      Route="DashboardProgramadorPage" />
+        </Tab>
+
+        <Tab Title="Kanban" Icon="kanban.png">
+            <ShellContent ContentTemplate="{DataTemplate views:KanbanPage}"
+                      Route="KanbanPage" />
+        </Tab>
+
+        <Tab Title="Tarefas" Icon="play.png">
+            <ShellContent ContentTemplate="{DataTemplate views:TarefaConcluidaPage}"
+                      Route="TarefaConcluidaPage" />
+        </Tab>
+
+        <Tab Title="Perfil" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate views:PerfilPage}"
+                      Route="PerfilPage" />
+        </Tab>
+    </TabBar>
+
+</Shell>
