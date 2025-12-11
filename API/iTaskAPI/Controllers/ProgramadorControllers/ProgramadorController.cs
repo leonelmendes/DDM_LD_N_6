@@ -32,6 +32,14 @@ namespace iTaskAPI.Controllers.ProgramadorControllers
             return Ok(programadores);
         }
 
+        [HttpPut("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProgramadorProfileDTO dto)
+        {
+            var sucesso = await _repository.UpdatePerfilProgramadorAsync(dto);
+            if (!sucesso) return NotFound("Programador não encontrado.");
+            return Ok("Perfil atualizado com sucesso.");
+        }
+
         // GET /api/programador/{id}
         // Retorna um programador específico
         [HttpGet("GetById/{id}")]

@@ -12,6 +12,36 @@ namespace iTaskAPI.Repository.TarefaRepository
         {
             _connection = connection;
         }
+
+        public async Task<bool> AtualizarEstadoAsync(int id, string novoEstado)
+        {
+            var tarefa = await _connection.Tarefas.FindAsync(id);
+            if (tarefa == null) return false;
+
+            // Lógica para preencher datas reais automaticamente
+            if (novoEstado == "Doing" && tarefa.EstadoAtual == "To Do")
+            {
+                // Começou agora
+                tarefa.DataRealInicio = DateTime.UtcNow;
+            }
+            else if (novoEstado == "Done" && tarefa.EstadoAtual == "Doing")
+            {
+                // Terminou agora
+                tarefa.DataRealFim = DateTime.UtcNow;
+
+                // Proteção: Se por acaso DataRealInicio for null (erro antigo), define agora para não quebrar o cálculo
+                if (tarefa.DataRealInicio == null)
+                {
+                    tarefa.DataRealInicio = tarefa.DataCriacao; // Fallback
+                }
+            }
+
+            tarefa.EstadoAtual = novoEstado;
+
+            await _connection.SaveChangesAsync();
+            return true;
+        }
+
         public async Task AddAsync(Tarefa tarefa)
         {
             tarefa.DataPrevistaInicio = DateTime.SpecifyKind(tarefa.DataPrevistaInicio.Value, DateTimeKind.Unspecified);

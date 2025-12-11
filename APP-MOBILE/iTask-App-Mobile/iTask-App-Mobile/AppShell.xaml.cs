@@ -25,6 +25,7 @@ namespace iTask_App_Mobile
             Routing.RegisterRoute("TarefaDetailPage", typeof(TarefaDetailPage));
             Routing.RegisterRoute("TarefaListPage", typeof(TarefaListPage));
             Routing.RegisterRoute("TarefasConcluidasGestorPage", typeof(TarefasConcluidasGestorPage));
+            Routing.RegisterRoute("EditarPerfilPage", typeof(EditarPerfilPage));
             #endregion
         }
 

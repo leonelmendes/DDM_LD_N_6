@@ -85,6 +85,7 @@ namespace iTask_App_Mobile.ViewModels
                 if (resultado.IdGestor != 0)
                 {
                     Preferences.Set("gestor_id", resultado.IdGestor);
+                    //Preferences.Set("gestor_id", resultado.De);
                 }
                 else
                 {

@@ -32,6 +32,14 @@ namespace iTaskAPI.Controllers.GestorControllers
             return Ok(gestores);
         }
 
+        [HttpPut("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateGestorProfileDTO dto)
+        {
+            var sucesso = await _repository.UpdatePerfilGestorAsync(dto);
+            if (!sucesso) return NotFound("Gestor não encontrado.");
+            return Ok("Perfil atualizado com sucesso.");
+        }
+
         // GET /api/gestor/{id}
         // Busca um gestor específico
         [HttpGet("GetById/{id}")]

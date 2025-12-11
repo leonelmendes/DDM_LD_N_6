@@ -1,4 +1,5 @@
-﻿using iTask_App_Mobile.Models;
+﻿using iTask_App_Mobile.DTOs;
+using iTask_App_Mobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,8 @@ namespace iTask_App_Mobile.Services.UtilizadorService
     {
         Task<UtilizadorModel> GetByIdAsync(int id);
         Task<bool> UpdateUtilizadorAsync(int id, UtilizadorModel dto);
+
+        Task<bool> AtualizarPerfilGestorAsync(UpdateGestorProfileDTO dto);
+        Task<bool> AtualizarPerfilProgramadorAsync(UpdateProgramadorProfileDTO dto);
     }
 }

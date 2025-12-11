@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using iTask_App_Mobile.Services.TarefaService;
 using System;
@@ -23,10 +24,8 @@ namespace iTask_App_Mobile.ViewModels
         {
             try
             {
-                // 1. Busca dados da API
+                // 1. Busca e Filtra (Código igual ao anterior)
                 var todasTarefas = await _tarefaService.GetTarefasDetalhesAsync();
-
-                // 2. Filtra: Criadas pelo Gestor Logado E Status "Done"
                 int idGestorLogado = Preferences.Get("gestor_id", 1);
                 var tarefasFiltradas = todasTarefas
                     .Where(t => t.IdGestor == idGestorLogado && t.EstadoAtual == "Done")
@@ -34,40 +33,44 @@ namespace iTask_App_Mobile.ViewModels
 
                 if (!tarefasFiltradas.Any())
                 {
-                    await App.Current.MainPage.DisplayAlert("Aviso", "Não há tarefas concluídas para exportar.", "OK");
+                    await App.Current.MainPage.DisplayAlert("Aviso", "Não há tarefas para exportar.", "OK");
                     return;
                 }
 
-                // 3. Gera o conteúdo do CSV (Separado por ponto e vírgula ';')
+                // 2. Gera o conteúdo do CSV
                 var csv = new StringBuilder();
-
-                // Cabeçalho
                 csv.AppendLine("Programador;Descricao;DataPrevistaInicio;DataPrevistaFim;TipoTarefa;DataRealInicio;DataRealFim");
 
-                // Linhas
                 foreach (var t in tarefasFiltradas)
                 {
-                    string linha = $"{t.ProgramadorNome};{t.Descricao};{FormatDate(t.DataPrevistaInicio)};{FormatDate(t.DataPrevistaFim)};{t.TipoTarefaNome};{FormatDate(t.DataRealInicio)};{FormatDate(t.DataRealFim)}";
+                    // Nota: Importante tratar nulos para evitar crash
+                    string linha = $"{t.ProgramadorNome};{t.Descricao};{t.DataPrevistaInicio:dd/MM/yyyy};{t.DataPrevistaFim:dd/MM/yyyy};{t.TipoTarefaNome};{t.DataRealInicio:dd/MM/yyyy};{t.DataRealFim:dd/MM/yyyy}";
                     csv.AppendLine(linha);
                 }
 
-                // 4. Salvar o arquivo
-                string nomeArquivo = $"Relatorio_Tarefas_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
-                string caminhoArquivo = Path.Combine(FileSystem.CacheDirectory, nomeArquivo);
+                // 3. Prepara o arquivo para SALVAR (FileSaver)
+                string nomeArquivo = $"Relatorio_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
 
-                File.WriteAllText(caminhoArquivo, csv.ToString(), Encoding.UTF8);
+                // Converte a string do CSV para um Stream de memória
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(csv.ToString()));
 
-                // 5. Compartilhar o arquivo (Permite salvar ou enviar por email/whatsapp)
-                await Share.RequestAsync(new ShareFileRequest
+                // 4. Chama o FileSaver (Abre o "Salvar Como" do Android)
+                var resultado = await FileSaver.Default.SaveAsync(nomeArquivo, stream, CancellationToken.None);
+
+                if (resultado.IsSuccessful)
                 {
-                    Title = "Exportar Relatório de Tarefas",
-                    File = new ShareFile(caminhoArquivo)
-                });
-
+                    await App.Current.MainPage.DisplayAlert("Sucesso", $"Arquivo salvo em: {resultado.FilePath}", "OK");
+                }
+                else
+                {
+                    // Se o usuário cancelou ou deu erro
+                    if (resultado.Exception != null)
+                        await App.Current.MainPage.DisplayAlert("Erro", $"Falha ao salvar: {resultado.Exception.Message}", "OK");
+                }
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Erro", $"Falha ao exportar: {ex.Message}", "OK");
+                await App.Current.MainPage.DisplayAlert("Erro Crítico", ex.Message, "OK");
             }
         }
 

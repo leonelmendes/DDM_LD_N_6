@@ -121,7 +121,7 @@ namespace iTask_App_Mobile.ViewModels
 
             var model = new TarefaModel
             {
-                IdGestor = Preferences.Get("user_id", 0),
+                IdGestor = Preferences.Get("gestor_id", 0),
                 IdProgramador = ProgramadorSelecionado.Id,
                 IdTipoTarefa = TipoTarefaSelecionado.Id,
                 Titulo = Titulo,

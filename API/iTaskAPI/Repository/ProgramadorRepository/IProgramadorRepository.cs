@@ -12,6 +12,7 @@ namespace iTaskAPI.Repository.ProgramadorRepository
         Task<Programador?> GetByIdAsync(int id);
         Task<IEnumerable<Tarefa>> GetTarefasByProgramadorAsync(int programadorId);
         Task<ProgramadorDetalhe> GetDetalheByIdAsync(int id);
+        Task<bool> UpdatePerfilProgramadorAsync(UpdateProgramadorProfileDTO dto);
         Task AddAsync(Programador programador);
         Task<bool> UpdateAsync(ProgramadorDetalhe programador);
         Task DeleteAsync(Programador programador);

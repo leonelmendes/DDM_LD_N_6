@@ -11,7 +11,7 @@
                        FontFamily="InterSemiBold"
                        FontSize="22"
                        TextColor="#111827"/>
-                <Label Text="O gestor poderá exportar todas as suas tarefas concluídas em formato CSV."
+                <Label Text="Aqui o gestor exportará todas as suas tarefas concluídas em formato CSV."
                        FontFamily="InterRegular"
                        FontSize="14"
                        TextColor="#4B5563" 

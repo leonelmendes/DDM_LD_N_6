@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iTask_App_Mobile.Views.EditarPerfilPage"
+             Title="EditarPerfilPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" 
+                   HorizontalOptions="Center" Padding="0" IsClippedToBounds="True" 
+                   BorderColor="{StaticResource Primary}" Margin="0,20">
+                <Image Source="person_1.png" Aspect="AspectFill"/>
+            </Frame>
+
+            <Label Text="Atualize suas informações" HorizontalOptions="Center" TextColor="Gray" FontSize="14"/>
+
+            <VerticalStackLayout Spacing="15">
+
+                <StackLayout Spacing="5">
+                    <Label Text="Nome Completo" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Frame Padding="10,5" CornerRadius="10" BorderColor="#E5E7EB">
+                        <Entry Text="{Binding Nome}" Placeholder="Seu nome"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="5">
+                    <Label Text="Username" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Frame Padding="10,5" CornerRadius="10" BorderColor="#E5E7EB">
+                        <Entry Text="{Binding Username}" Placeholder="Seu usuário"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="5" IsVisible="{Binding IsGestor}">
+                    <Label Text="Departamento" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Frame Padding="10,5" CornerRadius="10" BorderColor="#E5E7EB">
+                        <Entry Text="{Binding Departamento}" Placeholder="Ex: TI, RH"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="5" IsVisible="{Binding IsProgramador}">
+                    <Label Text="Nível de Experiência" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Frame Padding="10,5" CornerRadius="10" BorderColor="#E5E7EB">
+                        <Picker SelectedItem="{Binding NivelExperiencia}" Title="Selecione">
+                            <Picker.Items>
+                                <x:String>Júnior</x:String>
+                                <x:String>Pleno</x:String>
+                                <x:String>Sênior</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Spacing="5">
+                    <Label Text="Nova Senha (Opcional)" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Frame Padding="10,5" CornerRadius="10" BorderColor="#E5E7EB">
+                        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Deixe vazio para manter"/>
+                    </Frame>
+                </StackLayout>
+
+            </VerticalStackLayout>
+
+            <Button Text="Salvar Alterações" 
+                    Command="{Binding SalvarPerfilCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="50"
+                    Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

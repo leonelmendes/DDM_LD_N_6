@@ -139,6 +139,7 @@
                        Padding="0">
                     <Button Text="Editar Perfil"
                             FontFamily="InterSemiBold"
+                            Command="{Binding NavegarEdicao}"
                             TextColor="White"
                             HeightRequest="50"
                             BackgroundColor="Transparent"/>

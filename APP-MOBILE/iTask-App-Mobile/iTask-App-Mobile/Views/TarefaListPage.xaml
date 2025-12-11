@@ -26,7 +26,7 @@
                         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto, Auto">
 
                             <VerticalStackLayout Grid.Column="0" Grid.RowSpan="3" Spacing="2">
-                                <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="16" TextColor="Black"/>
+                                <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="16" TextColor="Black" LineBreakMode="TailTruncation" MaxLines="1"/>
                                 <Label Text="{Binding Descricao}" FontSize="12" TextColor="Gray" LineBreakMode="TailTruncation" MaxLines="2"/>
 
                                 <Label Text="{Binding ProgramadorNome, StringFormat='Dev: {0}'}" 

@@ -75,6 +75,12 @@ namespace iTask_App_Mobile.ViewModels
 
             //await Shell.Current.GoToAsync("//LoginPage");
         }
+
+        [RelayCommand]
+        private async Task NavegarEdicaoAsync()
+        {
+            await Shell.Current.GoToAsync("/EditarPerfilPage");
+        }
         #endregion
     }
 }

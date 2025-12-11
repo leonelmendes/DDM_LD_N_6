@@ -26,6 +26,30 @@ namespace iTaskAPI.Repository.ProgramadorRepository
             return programadores;
         }
 
+        public async Task<bool> UpdatePerfilProgramadorAsync(UpdateProgramadorProfileDTO dto)
+        {
+            var dev = await _connection.Programadores
+                .Include(p => p.Utilizador)
+                .FirstOrDefaultAsync(p => p.Id == dto.Id);
+
+            if (dev == null) return false;
+
+            // Tabela Programador
+            dev.NivelExperiencia = dto.NivelExperiencia;
+
+            // Tabela Utilizador
+            dev.Utilizador.Nome = dto.Nome;
+            dev.Utilizador.Username = dto.Username;
+
+            if (!string.IsNullOrWhiteSpace(dto.Password))
+            {
+                dev.Utilizador.Password = dto.Password;
+            }
+
+            await _connection.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<List<ProgramadorCardEquipeDTO>> GetProgramadoresParaEquipeAsync()
         {
             return await _connection.Programadores

@@ -1,4 +1,5 @@
-﻿using iTask_App_Mobile.Models;
+﻿using iTask_App_Mobile.DTOs;
+using iTask_App_Mobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,38 @@ namespace iTask_App_Mobile.Services.UtilizadorService
 
             var result = await client.PutAsJsonAsync(url, dto);
             return result.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> AtualizarPerfilGestorAsync(UpdateGestorProfileDTO dto)
+        {
+            string url = $"{BaseUrl}/api/Gestor/UpdateProfile";
+            try
+            {
+                using HttpClient client = new HttpClient();
+                var response = await client.PutAsJsonAsync(url, dto);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro Service Gestor: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> AtualizarPerfilProgramadorAsync(UpdateProgramadorProfileDTO dto)
+        {
+            string url = $"{BaseUrl}/api/Programador/UpdateProfile";
+            try
+            {
+                using HttpClient client = new HttpClient();
+                var response = await client.PutAsJsonAsync(url, dto);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro Service Programador: {ex.Message}");
+                return false;
+            }
         }
     }
 }

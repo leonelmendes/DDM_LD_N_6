@@ -163,9 +163,7 @@ namespace iTaskAPI.Controllers.TarefaControllers
                 return NotFound($"Tarefa com ID {id} não encontrada.");
             }
 
-            tarefa.EstadoAtual = novoEstado;
-
-            await _repository.UpdateAsync(tarefa);
+            await _repository.AtualizarEstadoAsync(id, novoEstado);
 
             return Ok($"Estado da tarefa atualizado para: {novoEstado}");
         }
