@@ -25,15 +25,15 @@
 
             <!-- Saudação -->
             <VerticalStackLayout Margin="0,5">
-                <Label Text="Olá, João Silva"
+                <Label Text="Olá, Bem-vindo"
                        FontFamily="InterBold+-89"
                        FontSize="Medium"
                        TextColor="{StaticResource Black}"/>
 
-                <Label Text="Programador · 12 tarefas atribuidas"
-                       FontFamily="InterRegular"
-                       FontSize="14"
-                       TextColor="{StaticResource Gray600}"/>
+                <Label Text="{Binding NomeProgramador}"
+                       FontFamily="InterBold+-89"
+                       FontSize="Medium"
+                       TextColor="{StaticResource Black}"/>
             </VerticalStackLayout>
 
             <!-- CARDS -->
@@ -52,7 +52,7 @@
                                FontSize="15"
                                TextColor="{StaticResource Gray600}"/>
 
-                        <Label Text="25"
+                        <Label Text="{Binding DashboardData.TotalTarefas}"
                                FontFamily="InterSemiBold"
                                FontSize="28"
                                TextColor="{StaticResource Primary}"
@@ -72,7 +72,7 @@
                                FontSize="15"
                                TextColor="#3E9153"/>
 
-                        <Label Text="12"
+                        <Label Text="{Binding DashboardData.TarefasDone}"
                                FontFamily="InterSemiBold"
                                FontSize="28"
                                TextColor="#3E9153"
@@ -97,6 +97,9 @@
                        BackgroundColor="{StaticResource Primary}"
                        Padding="14"
                        HeightRequest="52">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrParaKanbanCommand}"/>
+                    </Frame.GestureRecognizers>
                     <Grid ColumnDefinitions="Auto,*">
                         <Image Source="kanban_icon.png"
                                WidthRequest="22"
@@ -116,6 +119,10 @@
                        BackgroundColor="{StaticResource Gray100}"
                        Padding="14"
                        HeightRequest="52">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrParaHistoricoCommand}"/>
+                    </Frame.GestureRecognizers>
+                    
                     <Grid ColumnDefinitions="Auto,*">
                         <Image Source="check_icon.png"
                                WidthRequest="22"

@@ -35,9 +35,20 @@ namespace iTaskAPI.Controllers.GestorControllers
         [HttpPut("UpdateProfile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateGestorProfileDTO dto)
         {
-            var sucesso = await _repository.UpdatePerfilGestorAsync(dto);
-            if (!sucesso) return NotFound("Gestor não encontrado.");
-            return Ok("Perfil atualizado com sucesso.");
+            try
+            {
+                var sucesso = await _repository.UpdatePerfilGestorAsync(dto);
+                if (!sucesso) return NotFound("Perfil não encontrado.");
+                return Ok("Perfil atualizado com sucesso.");
+            }
+            catch (InvalidOperationException ex) // <--- Captura o erro de username duplicado
+            {
+                return BadRequest(ex.Message); // Retorna erro 400 com a mensagem
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Erro interno ao atualizar.");
+            }
         }
 
         // GET /api/gestor/{id}

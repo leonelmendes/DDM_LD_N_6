@@ -16,6 +16,7 @@ namespace iTaskAPI.Repository.ProgramadorRepository
         Task AddAsync(Programador programador);
         Task<bool> UpdateAsync(ProgramadorDetalhe programador);
         Task DeleteAsync(Programador programador);
+        Task<DashboardGestorDTO> GetDashboardProgramadorAsync(int idUtilizador);
         Task SaveAsync();
     }
 }

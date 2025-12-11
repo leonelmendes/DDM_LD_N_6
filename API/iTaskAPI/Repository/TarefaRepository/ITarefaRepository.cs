@@ -15,6 +15,7 @@ namespace iTaskAPI.Repository.TarefaRepository
         Task<bool> AtualizarEstadoAsync(int id, string novoEstado);
         Task UpdateAsync(Tarefa tarefa);
         Task DeleteAsync(Tarefa tarefa);
+        Task<DashboardGestorDTO> GetDashboardGlobalAsync();
         Task SaveAsync();
     }
 }

@@ -94,7 +94,7 @@
                            Padding="12"
                            Grid.Column="0">
                         <VerticalStackLayout>
-                            <Label Text="8"
+                        <Label Text="{Binding DashboardData.TarefasToDo}"
                                    FontFamily="InterBold"
                                    FontSize="22"
                                    TextColor="#E47500"/>
@@ -109,7 +109,7 @@
                            Padding="12"
                            Grid.Column="1">
                         <VerticalStackLayout>
-                            <Label Text="5"
+                        <Label Text="{Binding DashboardData.TarefasDoing}"
                                    FontFamily="InterBold"
                                    FontSize="22"
                                    TextColor="#3567F0"/>
@@ -124,7 +124,7 @@
                            Padding="12"
                            Grid.Column="2">
                         <VerticalStackLayout>
-                            <Label Text="12"
+                        <Label Text="{Binding DashboardData.TarefasDone}"
                                    FontFamily="InterBold"
                                    FontSize="22"
                                    TextColor="#17A34A"/>

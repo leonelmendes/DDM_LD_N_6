@@ -41,9 +41,13 @@ namespace iTask_App_Mobile.ViewModels
         [ObservableProperty]
         private string _previsaoEntregaTexto = "Calculando...";
         [ObservableProperty]
+        private DashboardDTO _dashboardData;
+        [ObservableProperty]
         private bool _temPrevisao = false;
         [ObservableProperty]
         private string nome ;
+        [ObservableProperty]
+        private bool isBusy;
         [ObservableProperty]
         private ObservableCollection<ProgramadorCardEquipeDTO> programadores;
 
@@ -75,6 +79,7 @@ namespace iTask_App_Mobile.ViewModels
         public ICommand PagePerfilCommand { get; }
         public ICommand PageTarefaConcluidaGestorCommand { get; }
 
+
         [RelayCommand]
         public async Task LoadEquipeDoGestorAsync()
         {
@@ -105,6 +110,7 @@ namespace iTask_App_Mobile.ViewModels
             {
                 MainThread.BeginInvokeOnMainThread(() => { IsLoading = false; });
                 await CarregarDashboard();
+                await CarregarDashboard2();
             }
             IsLoading = false;
         }
@@ -139,6 +145,29 @@ namespace iTask_App_Mobile.ViewModels
                 PrevisaoEntregaTexto = "--";
             }
         }
+
+        [RelayCommand]
+        public async Task CarregarDashboard2()
+        {
+            if (IsBusy) return;
+            IsBusy = true;
+
+            try
+            {
+                // Chama o endpoint GLOBAL
+                var dados = await _tarefaService.GetDashboardGlobalAsync();
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    DashboardData = dados;
+                });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         #endregion
 
         #region Métodos

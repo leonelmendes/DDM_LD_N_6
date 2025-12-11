@@ -73,6 +73,13 @@ namespace iTaskAPI.Controllers.TarefaControllers
             return Ok(tarefa);
         }
 
+        [HttpGet("DashboardGlobal")]
+        public async Task<IActionResult> GetDashboardGlobal()
+        {
+            var dados = await _repository.GetDashboardGlobalAsync();
+            return Ok(dados);
+        }
+
         // GET /api/tarefa/gestor/{gestorId}
         // Retorna todas as tarefas criadas por um Gestor
         [HttpGet("GetByGestor/{gestorId}")]

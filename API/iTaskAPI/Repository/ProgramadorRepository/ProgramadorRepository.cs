@@ -28,16 +28,28 @@ namespace iTaskAPI.Repository.ProgramadorRepository
 
         public async Task<bool> UpdatePerfilProgramadorAsync(UpdateProgramadorProfileDTO dto)
         {
+            // 1. BUSCAR O PROGRAMADOR USANDO O ID DO UTILIZADOR
             var dev = await _connection.Programadores
                 .Include(p => p.Utilizador)
-                .FirstOrDefaultAsync(p => p.Id == dto.Id);
+                .FirstOrDefaultAsync(p => p.IdUtilizador == dto.Id); // <--- Busca pelo FK
 
             if (dev == null) return false;
 
-            // Tabela Programador
+            // 2. VERIFICAR SE O USERNAME JÁ EXISTE
+            bool usernameEmUso = await _connection.Utilizadores
+                .AnyAsync(u => u.Username == dto.Username && u.Id != dev.IdUtilizador);
+
+            if (usernameEmUso)
+            {
+                throw new InvalidOperationException("Este nome de utilizador já está em uso.");
+            }
+
+            // 3. ATUALIZAR DADOS
+
+            // Tabela Específica (Programadores)
             dev.NivelExperiencia = dto.NivelExperiencia;
 
-            // Tabela Utilizador
+            // Tabela Pai (Utilizadores)
             dev.Utilizador.Nome = dto.Nome;
             dev.Utilizador.Username = dto.Username;
 
@@ -46,8 +58,45 @@ namespace iTaskAPI.Repository.ProgramadorRepository
                 dev.Utilizador.Password = dto.Password;
             }
 
-            await _connection.SaveChangesAsync();
-            return true;
+            // 4. SALVAR TUDO
+            try
+            {
+                await _connection.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao salvar no banco: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<DashboardGestorDTO> GetDashboardProgramadorAsync(int idUtilizador)
+        {
+            // 1. Descobrir o ID do Programador baseado no Utilizador logado
+            var programador = await _connection.Programadores
+                .FirstOrDefaultAsync(p => p.IdUtilizador == idUtilizador);
+
+            if (programador == null) return new DashboardGestorDTO();
+
+            // 2. Buscar APENAS as tarefas desse programador
+            var tarefas = await _connection.Tarefas
+                .Where(t => t.IdProgramador == programador.Id)
+                .ToListAsync();
+
+            // 3. Preencher o DTO (Reaproveitamos o mesmo DTO do Gestor)
+            return new DashboardGestorDTO
+            {
+                TotalTarefas = tarefas.Count,
+                TarefasDone = tarefas.Count(t => t.EstadoAtual == "Done"),
+
+                // Opcionais (se quiser mostrar no futuro)
+                TarefasToDo = tarefas.Count(t => t.EstadoAtual == "To Do"),
+                TarefasDoing = tarefas.Count(t => t.EstadoAtual == "Doing"),
+
+                // Programador não precisa ver a previsão geral, deixamos vazio ou calculado só pra ele
+                PrevisaoTexto = "Foco no prazo!"
+            };
         }
 
         public async Task<List<ProgramadorCardEquipeDTO>> GetProgramadoresParaEquipeAsync()

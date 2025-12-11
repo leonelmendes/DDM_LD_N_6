@@ -62,6 +62,8 @@ namespace iTask_App_Mobile
             builder.Services.AddTransient<TarefasConcluidasPageViewModel>();
             builder.Services.AddTransient<TarefasConcluidasGestorViewModel>();
             builder.Services.AddTransient<RelatorioPageViewModel>();
+            builder.Services.AddTransient<EditarPerfilPageViewModel>();
+            builder.Services.AddTransient<DashboardProgramadorPageViewModel>();
 
             // Views
             builder.Services.AddTransient<LoginPage>();
@@ -79,6 +81,7 @@ namespace iTask_App_Mobile
             builder.Services.AddTransient<TarefaDetailPage>();
             builder.Services.AddTransient<TarefaListPage>();
             builder.Services.AddTransient<TarefasConcluidasGestorViewModel>();
+            builder.Services.AddTransient<EditarPerfilPage>();
 
 
 #if DEBUG

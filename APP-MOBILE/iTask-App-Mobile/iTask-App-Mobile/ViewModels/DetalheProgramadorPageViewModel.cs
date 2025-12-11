@@ -31,6 +31,8 @@ namespace iTask_App_Mobile.ViewModels
         #region Properties
         [ObservableProperty]
         private ProgramadorDetalhe programadorInicial;
+        [ObservableProperty]
+        private DashboardDTO _dashboardData;
 
         // Propriedade para exibir o Gestor na tela (somente leitura)
         [ObservableProperty]

@@ -43,6 +43,21 @@ namespace iTask_App_Mobile.Services.ProgramadorService
             return new List<ProgramadorCardEquipeDTO>(); // Retorna lista vazia em caso de erro
         }
 
+        public async Task<DashboardDTO> GetDashboardProgramadorAsync(int idUtilizador)
+        {
+            string url = $"{BaseUrl}/api/Tarefa/DashboardProgramador/{idUtilizador}";
+            try
+            {
+                using HttpClient _httpClient = new HttpClient();
+                return await _httpClient.GetFromJsonAsync<DashboardDTO>(url) ?? new DashboardDTO();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro Dashboard Dev: {ex.Message}");
+                return new DashboardDTO();
+            }
+        }
+
         public async Task<List<ProgramadorCardEquipeDTO>> GetByGestorAsync(int idGestor)
         {
             var url = DeviceInfo.Platform == DevicePlatform.Android

@@ -22,6 +22,8 @@ namespace iTask_App_Mobile.Services.ProgramadorService
         // Criar programador
         Task<bool> CreateProgramadorAsync(CreateProgramadorDTO model);
 
+        Task<DashboardDTO> GetDashboardProgramadorAsync(int idUtilizador);
+
         // Editar programador
         Task<bool> UpdateProgramadorAsync(ProgramadorDetalhe programador);
 

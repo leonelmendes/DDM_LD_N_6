@@ -133,17 +133,11 @@
             <VerticalStackLayout Padding="20,5" Spacing="12">
 
                 <!-- Editar perfil -->
-                <Frame BackgroundColor="{StaticResource Primary}"
-                       CornerRadius="14"
-                       HasShadow="False"
-                       Padding="0">
-                    <Button Text="Editar Perfil"
+                <Button Text="Editar Perfil"
                             FontFamily="InterSemiBold"
-                            Command="{Binding NavegarEdicao}"
+                            Command="{Binding NavegarEdicaoCommand}"
                             TextColor="White"
-                            HeightRequest="50"
-                            BackgroundColor="Transparent"/>
-                </Frame>
+                            HeightRequest="50"/>
 
                 <!-- Logout -->
                 <Frame CornerRadius="14"

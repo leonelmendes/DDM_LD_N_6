@@ -22,6 +22,8 @@ namespace iTask_App_Mobile.Services.TarefaService
         // Obter tarefa específica
         Task<TarefaModel?> GetTarefaByIdAsync(int id);
 
+        Task<DashboardDTO> GetDashboardGlobalAsync();
+
         // Obter previsão de entrega (data mais próxima entre as tarefas "To Do")
         Task<double> GetPrevisaoEntregaAsync();
 

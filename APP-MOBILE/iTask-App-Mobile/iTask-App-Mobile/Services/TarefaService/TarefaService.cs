@@ -47,6 +47,21 @@ namespace iTask_App_Mobile.Services.TarefaService
             }
         }
 
+        public async Task<DashboardDTO> GetDashboardGlobalAsync()
+        {
+            string url = $"{BaseUrl}/api/Tarefa/DashboardGlobal";
+            try
+            {
+                using HttpClient _httpClient = new HttpClient();
+                return await _httpClient.GetFromJsonAsync<DashboardDTO>(url) ?? new DashboardDTO();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro Dashboard: {ex.Message}");
+                return new DashboardDTO { PrevisaoTexto = "--" };
+            }
+        }
+
         public async Task<IEnumerable<TarefaDetalhesDTO>> GetTarefasDetalhesAsync()
         {
             string url = $"{BaseUrl}/api/Tarefa/GetAllTarefasDetalhes";

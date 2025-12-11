@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using IntelliJ.Lang.Annotations;
 using iTask_App_Mobile.DTOs;
 using iTask_App_Mobile.Services.UtilizadorService;
 using System;
@@ -104,8 +103,8 @@ namespace iTask_App_Mobile.ViewModels
                 if (sucesso)
                 {
                     // Atualiza dados locais para refletir na UI imediatamente
-                    Preferences.Set("NomeUsuario", Nome);
-                    Preferences.Set("Username", Username);
+                    Preferences.Set("user_nome", Nome);
+                    Preferences.Set("user_username", Username);
 
                     await App.Current.MainPage.DisplayAlert("Sucesso", "Perfil atualizado!", "OK");
                     await Shell.Current.GoToAsync("..");
@@ -123,6 +122,12 @@ namespace iTask_App_Mobile.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        private async void VoltarAsync()
+        {
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

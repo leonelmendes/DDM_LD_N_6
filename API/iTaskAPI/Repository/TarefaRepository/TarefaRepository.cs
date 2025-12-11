@@ -42,6 +42,88 @@ namespace iTaskAPI.Repository.TarefaRepository
             return true;
         }
 
+        public async Task<DashboardGestorDTO> GetDashboardGlobalAsync()
+        {
+            // 1. Buscar TODAS as tarefas do sistema (Visão Global)
+            var tarefas = await _connection.Tarefas.ToListAsync();
+
+            // 2. Calcular Contadores Básicos
+            var dto = new DashboardGestorDTO
+            {
+                TotalTarefas = tarefas.Count,
+                TarefasToDo = tarefas.Count(t => t.EstadoAtual == "To Do"),
+                TarefasDoing = tarefas.Count(t => t.EstadoAtual == "Doing"),
+                TarefasDone = tarefas.Count(t => t.EstadoAtual == "Done")
+            };
+
+            // 3. ALGORITMO PREDITIVO (Requisito 28)
+
+            // A. Pegar histórico válido (Tarefas Done com datas reais e StoryPoints)
+            var historicoConcluidas = tarefas
+                .Where(t => t.EstadoAtual == "Done" &&
+                            t.DataRealInicio != null &&
+                            t.DataRealFim != null &&
+                            t.StoryPoints > 0)
+                .ToList();
+
+            // B. Pegar trabalho pendente (To Do com StoryPoints)
+            var pendentes = tarefas
+                .Where(t => t.EstadoAtual == "To Do" && t.StoryPoints > 0)
+                .ToList();
+
+            double horasTotais = 0;
+
+            // Só calculamos se houver histórico e pendências
+            if (historicoConcluidas.Any() && pendentes.Any())
+            {
+                // C. Calcular média de horas por StoryPoint (SP)
+                // Dicionário: [Chave: SP] -> [Valor: Média Horas]
+                var mediasPorSP = historicoConcluidas
+                    .GroupBy(t => t.StoryPoints.Value)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Average(t => (t.DataRealFim.Value - t.DataRealInicio.Value).TotalHours)
+                    );
+
+                var chavesHistorico = mediasPorSP.Keys.ToList();
+
+                // D. Iterar sobre o To Do e somar previsões
+                foreach (var item in pendentes)
+                {
+                    int spAlvo = item.StoryPoints.Value;
+
+                    if (mediasPorSP.ContainsKey(spAlvo))
+                    {
+                        // Temos histórico exato
+                        horasTotais += mediasPorSP[spAlvo];
+                    }
+                    else
+                    {
+                        // "Nearest Neighbor": Pega a média do SP mais próximo matematicamente
+                        int maisProximo = chavesHistorico.OrderBy(k => Math.Abs(k - spAlvo)).First();
+                        horasTotais += mediasPorSP[maisProximo];
+                    }
+                }
+            }
+
+            // 4. Formatar Resultado
+            dto.HorasPrevistasToDo = horasTotais;
+
+            if (horasTotais > 0)
+            {
+                TimeSpan ts = TimeSpan.FromHours(horasTotais);
+                // Formatação bonita para o Mobile
+                dto.PrevisaoTexto = ts.Days > 0
+                    ? $"{ts.Days} dias e {ts.Hours}h"
+                    : $"{ts.Hours} horas";
+            }
+            else
+            {
+                dto.PrevisaoTexto = pendentes.Any() ? "Sem dados históricos" : "Tudo em dia!";
+            }
+
+            return dto;
+        }
         public async Task AddAsync(Tarefa tarefa)
         {
             tarefa.DataPrevistaInicio = DateTime.SpecifyKind(tarefa.DataPrevistaInicio.Value, DateTimeKind.Unspecified);

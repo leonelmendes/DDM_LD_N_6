@@ -35,9 +35,20 @@ namespace iTaskAPI.Controllers.ProgramadorControllers
         [HttpPut("UpdateProfile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProgramadorProfileDTO dto)
         {
-            var sucesso = await _repository.UpdatePerfilProgramadorAsync(dto);
-            if (!sucesso) return NotFound("Programador não encontrado.");
-            return Ok("Perfil atualizado com sucesso.");
+            try
+            {
+                var sucesso = await _repository.UpdatePerfilProgramadorAsync(dto);
+                if (!sucesso) return NotFound("Perfil não encontrado.");
+                return Ok("Perfil atualizado com sucesso.");
+            }
+            catch (InvalidOperationException ex) // <--- Captura o erro de username duplicado
+            {
+                return BadRequest(ex.Message); // Retorna erro 400 com a mensagem
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Erro interno ao atualizar.");
+            }
         }
 
         // GET /api/programador/{id}
@@ -70,6 +81,13 @@ namespace iTaskAPI.Controllers.ProgramadorControllers
                 // Logar o erro se tiveres logger
                 return StatusCode(500, "Erro interno ao buscar equipe: " + ex.Message);
             }
+        }
+
+        [HttpGet("DashboardProgramador/{idUtilizador}")]
+        public async Task<IActionResult> GetDashboardProgramador(int idUtilizador)
+        {
+            var dados = await _repository.GetDashboardProgramadorAsync(idUtilizador);
+            return Ok(dados);
         }
 
         // GET /api/programador/EquipeCards/{idGestor}

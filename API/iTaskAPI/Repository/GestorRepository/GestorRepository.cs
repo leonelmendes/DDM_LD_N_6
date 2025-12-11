@@ -2,6 +2,7 @@ using iTaskAPI.Connection;
 using iTaskAPI.Models;
 using iTaskAPI.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace iTaskAPI.Repository.GestorRepository
 {
@@ -28,29 +29,51 @@ namespace iTaskAPI.Repository.GestorRepository
 
         public async Task<bool> UpdatePerfilGestorAsync(UpdateGestorProfileDTO dto)
         {
-            // O SEGREDO: Usar .Include(x => x.Utilizador)
+            // 1. BUSCAR O GESTOR USANDO O ID DO UTILIZADOR (A chave mágica)
+            // Usamos o .Include para trazer os dados da tabela pai (Utilizador) junto.
             var gestor = await _connection.Gestores
-                .Include(g => g.Utilizador) // Traz os dados da tabela pai
-                .FirstOrDefaultAsync(g => g.Id == dto.Id);
+                .Include(g => g.Utilizador)
+                .FirstOrDefaultAsync(g => g.IdUtilizador == dto.Id); // <--- MUDANÇA CRUCIAL: Busca pelo FK
 
             if (gestor == null) return false;
 
-            // 1. Atualiza dados da tabela Gestor
+            // 2. VERIFICAR SE O USERNAME JÁ EXISTE (Para evitar o erro 500 do banco)
+            // Verifica na tabela Utilizadores se existe algum username igual, mas ignora o próprio utilizador
+            bool usernameEmUso = await _connection.Utilizadores
+                .AnyAsync(u => u.Username == dto.Username && u.Id != gestor.IdUtilizador);
+
+            if (usernameEmUso)
+            {
+                // Lança erro para o Controller apanhar e devolver BadRequest
+                throw new InvalidOperationException("Este nome de utilizador já está em uso.");
+            }
+
+            // 3. ATUALIZAR DADOS NAS DUAS TABELAS
+
+            // Tabela Específica (Gestores)
             gestor.Departamento = dto.Departamento;
 
-            // 2. Atualiza dados da tabela Utilizador (Graças ao Include)
+            // Tabela Pai (Utilizadores)
             gestor.Utilizador.Nome = dto.Nome;
             gestor.Utilizador.Username = dto.Username;
 
-            // 3. Lógica de Password (Opcional)
+            // Atualiza senha apenas se o utilizador digitou algo
             if (!string.IsNullOrWhiteSpace(dto.Password))
             {
-                gestor.Utilizador.Password = dto.Password; // Idealmente, usar hash aqui
+                gestor.Utilizador.Password = dto.Password;
             }
 
-            // 4. Salva tudo numa única transação
-            await _connection.SaveChangesAsync();
-            return true;
+            // 4. SALVAR TUDO (O EF Core gera o UPDATE para as duas tabelas sozinho)
+            try
+            {
+                await _connection.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao salvar no banco: {ex.Message}");
+                return false;
+            }
         }
 
         // Buscar um gestor pelo ID
